@@ -27,10 +27,12 @@ export default new Vuex.Store({
   actions: {
     async newCustomer({commit}, customer){
 
-      const response = await axios.post('/localhost:5000/api/register/', {customer});
-      commit('newCustomer', response.data)
-      commit('registerNewCustomer', response.data)
-      console.log(response.data)
+      console.log(customer);
+      const resp = await axios.get('localhost:5000/');
+     // const response = await axios.post('localhost:5000/api/register/', {customer});
+     // commit('registerNewCustomer', response.data)
+     console.log(commit);
+      console.log(resp.data)
     }
   },
   modules: {

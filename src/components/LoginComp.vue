@@ -16,12 +16,12 @@
           </div>
           <div class="input password">
               <label>Lössenord</label>
-              <input type="password" placeholder="Ditt supr hemliga lösenord" v-model="customer.password1">
+              <input type="password" placeholder="Ditt supr hemliga lösenord" v-model="customer.password">
               
           </div>
           <div class="input password">
               <label>Skriv ditt igen Lössenord</label>
-              <input type="password" placeholder="samma lösenord igen" v-model="customer.password2">
+              <input type="password" placeholder="samma lösenord igen" v-model="customer.repeatPassword">
              
           </div>
           
@@ -30,21 +30,21 @@
             <h2>Adress</h2>
             <div class="input name">
               <label>Stad</label>
-              <input type="text" placeholder="Stad" v-model="customer.name" >
+              <input type="text" placeholder="Stad" v-model="adress.city" >
               
           </div>
           <div class="input email">
               <label>Gata</label>
-              <input type="text" placeholder="Gatunamn" v-model="customer.email">
+              <input type="text" placeholder="Gatunamn" v-model="adress.street">
               
           </div>
           <div class="input password">
               <label>Postnummer</label>
-              <input type="text" placeholder="Ditt supr hemliga lösenord" v-model="customer.password1">
+              <input type="text" placeholder="Ditt supr hemliga lösenord" v-model="adress.zip">
               
           </div>
             <div class="input password">
-                <div class="btn">
+                <div @click="register()" class="btn">
                    <p>Registrera</p> 
                 </div>
           </div>
@@ -63,8 +63,13 @@ export default {
           customer: {
               name:'',
               email:'',
-              password1:'',
-              password2:''
+              password:'',
+              repeatPassword:''
+          },
+          adress:{
+              street:'',
+              city:'',
+              zip:''
           }
       }
   },
@@ -73,7 +78,9 @@ export default {
       
         
     },
-    login(){
+    register(){
+        this.customer.adress = this.adress;
+        this.$store.dispatch("newCustomer", this.customer);
        
     },
     password(){
@@ -86,11 +93,7 @@ export default {
 <style scoped lang="scss">
     .loginComp{
         
-         background-image: linear-gradient(#770, #990, #ff0);
-        background-color: rgba($color:#0ff, $alpha: .5);
-        background-size: cover;
-        background-position: center;
-        
+         
        
        
 

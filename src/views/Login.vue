@@ -21,9 +21,9 @@ export default {
 </script>
 <style scoped>
     .login{
-        min-height: 90vh;
-        background: #fff;
-        border-radius: 10px;
+        min-height: 100vh;
+        background-image: linear-gradient(.25turn,#066, #0aa, #0ff);
+        
 
         display: flex;
         align-items: center;
