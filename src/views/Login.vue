@@ -1,7 +1,7 @@
 <template>
   <div class="login">
       <LoginComp></LoginComp>
-    Caspar
+    
       
     
   </div>

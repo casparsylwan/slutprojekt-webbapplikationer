@@ -1,30 +1,54 @@
 <template>
-  <div class="login">
-      <div class="welcome">
-            <div class="circle">
-                <svg class="svg" width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">            
-                    <path d="M0.124365 14.2012C1.76225 9.7738 3.42461 5.35558 5.08509 0.93553C5.32606 0.298093 5.78354 -0.0124061 6.52153 0.000379196C8.18201 0.0296027 9.84437 0.0241233 11.5048 0.00220566C12.2391 -0.00692667 12.6702 0.316358 12.913 0.96658C14.5585 5.3574 16.2189 9.74092 17.8549 14.1354C18.2804 15.2769 17.7533 15.971 16.4919 15.9856C15.0178 16.0039 13.5456 15.9893 12.0715 15.9893C11.6291 15.9893 11.1754 16.0094 10.9401 15.5308C10.7198 15.0888 11.0172 14.782 11.245 14.4587C12.111 13.2331 12.6344 11.8888 12.7719 10.4021C12.8321 9.7391 12.5384 9.42677 11.8701 9.42494C10.9306 9.42129 9.98933 9.42494 9.0499 9.42494C9.0499 9.42312 9.0499 9.42129 9.0499 9.42129C8.14059 9.42129 7.23128 9.40851 6.32385 9.42494C5.34677 9.44138 5.10203 9.72266 5.24511 10.6761C5.45596 12.0806 5.98686 13.3646 6.81145 14.5409C7.4026 15.3865 7.12021 15.9655 6.09606 15.9801C4.52971 16.0057 2.96148 16.0094 1.39514 15.9747C0.261797 15.9491 -0.257809 15.2331 0.124365 14.2012ZM7.91467 5.24416C8.36274 5.76288 8.72044 6.29255 8.88046 6.972C9.02919 7.60578 9.44337 7.6204 9.90461 7.193C10.7066 6.44598 10.8007 5.06517 10.059 4.11358C9.64293 3.58025 9.25511 3.07432 9.11579 2.37844C9.00283 1.82137 8.55665 1.7684 8.14059 2.17753C7.68311 2.62318 7.43084 3.16564 7.44025 3.8597C7.40072 4.34737 7.56639 4.84417 7.91467 5.24416Z" fill="black" fill-opacity="0.6"/>
-                </svg>
-            </div>
-          <h1>Välkommen till AirBean-familjen!</h1>
-          <h2>Skriv ditt e-post</h2>
-      </div>
+  <div class="loginComp">
+      
       <div class="input-box">
+
+          <h2>Kontaktuppgifter</h2>
+
           <div class="input name">
               <label>Name</label>
-              <input type="text" placeholder="Ditt namn" v-model="customer.name" >
-              {{ "customer.name" }}
+              <input type="text" placeholder="Ditt namn" v-model="customer.name" >              
           </div>
           <div class="input email">
               <label>E-post</label>
               <input type="text" placeholder="Din e-post" v-model="customer.email">
-              {{ "customer.email" }}
+              
           </div>
+          <div class="input password">
+              <label>Lössenord</label>
+              <input type="password" placeholder="Ditt supr hemliga lösenord" v-model="customer.password1">
+              
+          </div>
+          <div class="input password">
+              <label>Skriv ditt igen Lössenord</label>
+              <input type="password" placeholder="samma lösenord igen" v-model="customer.password2">
+             
+          </div>
+          
       </div>
-    
-      <div class="btn" @click="login()">
-          Sign in
-      </div>
+        <div class="input-box adress">  
+            <h2>Adress</h2>
+            <div class="input name">
+              <label>Stad</label>
+              <input type="text" placeholder="Stad" v-model="customer.name" >
+              
+          </div>
+          <div class="input email">
+              <label>Gata</label>
+              <input type="text" placeholder="Gatunamn" v-model="customer.email">
+              
+          </div>
+          <div class="input password">
+              <label>Postnummer</label>
+              <input type="text" placeholder="Ditt supr hemliga lösenord" v-model="customer.password1">
+              
+          </div>
+            <div class="input password">
+                <div class="btn">
+                   <p>Registrera</p> 
+                </div>
+          </div>
+        </div>
 
   </div>
 </template>
@@ -32,18 +56,123 @@
 <script>
 export default {
 
+
+  data(){
+      return {
+          openCloseMenu: false,
+          customer: {
+              name:'',
+              email:'',
+              password1:'',
+              password2:''
+          }
+      }
+  },
+  methods:{
+      open(){
+      
+        
+    },
+    login(){
+       
+    },
+    password(){
+        return this.customer.password1 == this.password2
+    }
+  }  
+  
 }
 </script>
-<style scoped>
-    .login{
-        min-height: 90vh;
-        background: #777;
-        border-radius: 10px;
+<style scoped lang="scss">
+    .loginComp{
+        
+         background-image: linear-gradient(#770, #990, #ff0);
+        background-color: rgba($color:#0ff, $alpha: .5);
+        background-size: cover;
+        background-position: center;
+        
+       
+       
 
         display: flex;
-        align-items: center;
-        justify-content: center;
+
+        
+        
+        
+
+        .input-box{
+            background-color: #777;
+            border: solid black 1px;
+            border-radius: 2rem;
+
+            color: #fff;
+            font-weight: bold;
+
+            margin: 2rem;
+            padding: 2rem;
+
+            -webkit-box-shadow: 10px 10px 53px 4px rgba(0,0,0,0.75);
+            -moz-box-shadow: 10px 10px 53px 4px rgba(0,0,0,0.75);
+            box-shadow: 10px 10px 53px 4px rgba(0,0,0,0.75);
+
+             h2{
+                text-align: center;
+                font-size: 1.5rem;
+                padding: 0.5rem;
+                }
+
+
+            .input{
+
+                display: flex;
+                flex-direction: column;
+
+                font-size:1.5rem;
+
+                margin: 1rem;
+
+                input[type="text"], input[type="password"]{
+
+                    height: 2rem;
+                    width: 25rem;
+
+                    border-radius: 5px;
+                    background-color: #bbb;
+
+                    font-size:1.5rem;
+
+
+
+                }
+
+            }
+
+
+        }
+
+        
     }
+
+    .adress{
+
+           
+       
+
+    
+
+        .btn{
+
+            padding: 1rem 2rem 1rem 2rem;
+
+            border-radius: 10px;
+            border: solid #333 2px;
+            
+            background-color: #f71;
+
+            text-align: center;
+        }
+    }
+    
 
 </style>>
 
