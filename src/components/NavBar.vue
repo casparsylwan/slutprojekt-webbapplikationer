@@ -1,25 +1,37 @@
 <template>
 
     <header class="navBar">
-        <nav class="top-nav">
+        <nav class="top-nav" v-if="this.$route.path === '/'">
             <router-link to="">Log In</router-link>
             <router-link to="">Create Account</router-link>
         </nav>
+        <nav class="top-nav" v-if="this.$route.path === '/account'">
+            <router-link to="">Log Out</router-link>
+            <router-link to="">My Account</router-link>
+        </nav>
+        <nav class="top-nav" v-if="this.$route.path === '/admin'">
+            <router-link to="">Log Out</router-link>
+            <router-link to="">Admin Settings</router-link>
+            <router-link to="">My Account</router-link>
+        </nav> 
         <nav class="bottom-nav">
             <div class="sinus">
                 <h1>SINUS.</h1>
             </div>
             <div class="links">
-                <router-link to="">Shop</router-link>
-                <router-link to="">Our Values</router-link>
+                <router-link to="/shop">Shop</router-link>
+                <router-link to="/about">Our Values</router-link>
                 <router-link to="">Contact</router-link>
-                <router-link to="">Cart</router-link>
+                <router-link to="/cart">Cart</router-link>
             </div>
         </nav>
     </header>
 </template>
 <script>
 export default {
+    props: {
+        anonymous: Boolean
+    },
     data: () => ({
 
     }),
@@ -55,6 +67,7 @@ export default {
                 h1{
                     font-size: 6rem;
                     color: black;
+                    margin: 0;
                 }
             }
             .links{

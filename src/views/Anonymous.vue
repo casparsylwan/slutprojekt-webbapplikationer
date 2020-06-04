@@ -19,7 +19,8 @@ export default {
   name: 'Home',
   components: {
     Footer
-  }
+  },
+
 }
 </script>
 
