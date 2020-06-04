@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Anonymous from "../views/Anonymous.vue";
+import Account from "../views/Account.vue"
+import Admin from "../views/Admin.vue"
 import Shop from '../views/Shop.vue'
 import Home from '../views/Home.vue'
 
@@ -9,6 +12,21 @@ Vue.use(VueRouter)
   const routes = [
   {
     path: '/',
+    name: 'Anonymous',
+    component: Anonymous
+  },
+  {
+    path: '/account',
+    name: 'Account',
+    component: Account
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin
+  },
+  {
+    path: '/home',
     name: 'Home',
     component: Home
   },
