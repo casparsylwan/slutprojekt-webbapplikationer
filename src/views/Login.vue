@@ -1,17 +1,17 @@
 <template>
   <div class="login">
-      <LoginComp></LoginComp>
+      <RegisterComp></RegisterComp>
     
       
     
   </div>
 </template>
 <script>
-import LoginComp from '../components/LoginComp';
+import RegisterComp from '../components/RegisterComp';
 export default {
     name: 'Login',
   components: {
-      LoginComp
+      RegisterComp
      
 
     
