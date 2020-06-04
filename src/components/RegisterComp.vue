@@ -1,56 +1,58 @@
 <template>
-  <div class="loginComp">
-      
-      <div class="input-box">
+<div class="container">
+    
+    <div class="loginComp">
+        
+        <div class="input-box">
 
-          <h2>Kontaktuppgifter</h2>
+            <h2>Kontaktuppgifter</h2>
 
-          <div class="input name">
-              <label>Name</label>
-              <input type="text" placeholder="Ditt namn" v-model="customer.name" >              
-          </div>
-          <div class="input email">
-              <label>E-post</label>
-              <input type="text" placeholder="Din e-post" v-model="customer.email">
-              
-          </div>
-          <div class="input password">
-              <label>Lössenord</label>
-              <input type="password" placeholder="Ditt supr hemliga lösenord" v-model="customer.password">
-              
-          </div>
-          <div class="input password">
-              <label>Skriv ditt igen Lössenord</label>
-              <input type="password" placeholder="samma lösenord igen" v-model="customer.repeatPassword">
-             
-          </div>
-          
-      </div>
-        <div class="input-box adress">  
-            <h2>Adress</h2>
             <div class="input name">
-              <label>Stad</label>
-              <input type="text" placeholder="Stad" v-model="adress.city" >
-              
-          </div>
-          <div class="input email">
-              <label>Gata</label>
-              <input type="text" placeholder="Gatunamn" v-model="adress.street">
-              
-          </div>
-          <div class="input password">
-              <label>Postnummer</label>
-              <input type="text" placeholder="Ditt supr hemliga lösenord" v-model="adress.zip">
-              
-          </div>
+                <label>Name</label>
+                <input type="text" placeholder="Ditt namn" v-model="customer.name" >              
+            </div>
+            <div class="input email">
+                <label>E-post</label>
+                <input type="text" placeholder="Din e-post" v-model="customer.email">
+                
+            </div>
             <div class="input password">
-                <div @click="register()" class="btn">
-                   <p>Registrera</p> 
-                </div>
-          </div>
+                <label>Lössenord</label>
+                <input type="password" placeholder="Ditt supr hemliga lösenord" v-model="customer.password">
+                
+            </div>
+            <div class="input password">
+                <label>Skriv ditt igen Lössenord</label>
+                <input type="password" placeholder="samma lösenord igen" v-model="customer.repeatPassword">
+                
+            </div>
+            
         </div>
-
-  </div>
+            <div class="input-box adress">  
+                <h2>Adress</h2>
+                <div class="input name">
+                <label>Stad</label>
+                <input type="text" placeholder="Stad" v-model="adress.city" >
+                
+            </div>
+            <div class="input email">
+                <label>Gata</label>
+                <input type="text" placeholder="Gatunamn" v-model="adress.street">
+                
+            </div>
+            <div class="input password">
+                <label>Postnummer</label>
+                <input type="text" placeholder="Ditt supr hemliga lösenord" v-model="adress.zip">
+                
+            </div>
+                <div class="input password">
+                    <div @click="register()" class="btn">
+                        <p>Registrera</p> 
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
@@ -91,21 +93,19 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-    .loginComp{
-        
-         
-       
-       
+    .container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loginComp{       
 
         display: flex;
 
-        
-        
-        
-
         .input-box{
             background-color: #777;
-            border: solid black 1px;
+            
             border-radius: 2rem;
 
             color: #fff;
