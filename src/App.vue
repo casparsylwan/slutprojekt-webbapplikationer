@@ -5,6 +5,9 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div> -->
+      <router-link to="/about">About</router-link> |
+      <router-link to="/shop">Shop</router-link>
+    
     <router-view/>
     
   </div>
@@ -23,7 +26,7 @@ export default {
 
 <style lang="scss">
 
-*{
+body{
   margin: 0;
 }
 #app {
@@ -32,6 +35,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin: 0;
 }
 
 #nav {
