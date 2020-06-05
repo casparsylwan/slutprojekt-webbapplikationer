@@ -13,12 +13,20 @@
         </div>
         <div class="name">
             <h2>
-               caspar 
+               {{ getClient.email }}
             </h2>
             <p>E-mail</p>
-            <p>cas@gmail.com</p>
-            
+            <p> {{ getClient.email }} </p>            
         </div>
+        <section class="table">
+            <article class="adress">
+
+            </article>
+            <article class="orders">
+
+            </article>
+
+        </section>
 
         </div>
     </div> 
@@ -26,6 +34,16 @@
 <script>
 export default {
 
+    method:{
+
+    },
+   computed:{
+
+    getClient(){
+      return this.$store.getters.getClient
+    }
+
+    }
 }
 </script>
 <style lang="scss" scoped>
@@ -34,7 +52,7 @@ export default {
 
         display: flex;
         justify-content: center;
-        align-items: center;
+
 
         background-color: #999;
         .photo{
@@ -70,7 +88,7 @@ export default {
                             border-radius: 100%;
                             margin-top: 2rem;
 
-                            animation: eyes 5s ease;
+                            animation: eyes 5s ease, glow 4s ease-in 5s infinite;
                         }
                     }
 
@@ -126,21 +144,39 @@ export default {
     }
 
     .presentation{
+        height: fit-content;
+
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
         background: #333;
+        border-bottom:2px #fff solid ;
         .name{
             color: #fff;
-            font-size: 1.5rem;
-            padding: 1rem;
+            
+            padding: 0rem;
+            
+
+            h2{
+                font-size: 1.8rem;
+                padding-bottom: 0.5rem;
+            }
+
+            p{
+                font-size: 1.2rem;
+                padding-bottom: 0.5rem;
+            }
 
             
             
         }
     }
+
+    // .table{
+
+    // }
 
     @keyframes frame {
         0%{
@@ -160,6 +196,19 @@ export default {
         50%
         {
             background-color: #971;
+        }
+        100%{
+            background-color: #0ff;
+        }
+    }
+
+     @keyframes glow {
+        0%{
+            box-shadow: 10px 13px 55px rgba(0, 255, 255, 1);
+        }
+        50%
+        {
+            box-shadow: 0 3px 5px rgba(0, 255, 255, 0.7);
         }
         100%{
             background-color: #0ff;
