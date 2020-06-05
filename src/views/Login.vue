@@ -10,7 +10,7 @@
 
             <div @click="test()" class="btn1">                
                 test
-                {{ getClient.name }}             
+                {{ redirectToMyPage(getClient) }}             
             </div>
         
     
@@ -52,13 +52,18 @@ export default {
         
         console.log("hej");
         this.$store.dispatch("getCustomerOrder");       
+    },
+    redirectToMyPage(name){
+        if(name.length>0)
+        console.log("hhhhhhhej!!!!");
     }
-      },
+
+  },
    computed:{
 
     getClient(){
       return this.$store.getters.getClient
-    }   
+    }
   }
   }
 

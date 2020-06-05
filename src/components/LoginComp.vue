@@ -38,13 +38,15 @@ export default {
               street:'',
               city:'',
               zip:''
-          }
+          },
+         trigger : this.getClient 
       }
+      
   },
    computed:{
 
     getClient(){
-      return this.$store.getters.getClient.name
+      return this.$store.getters.getClient
     }
     
     
@@ -52,10 +54,30 @@ export default {
   methods :{
        login(){
         this.customer.adress = this.adress;
-        this.$store.dispatch("loginCall", this.customer);
+        let prom = this.$store.dispatch("loginCall", this.customer);
+        console.log(prom.then(res =>{
+            console.log(res);
+              if(this.getClient.email.length>0){
+                this.$router.push({ path: '/profile'})
+                }
+        }))
+      
+        
+            
+        
         
         
     }
+  },
+  watch: {
+      trigger: function(val){
+          if(val){
+              console.log(this.trigger)
+          }
+              
+
+          
+      }
   }
     
 }
