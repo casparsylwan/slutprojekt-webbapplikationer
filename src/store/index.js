@@ -33,6 +33,10 @@ export default new Vuex.Store({
   },
   mutations: {
 
+    setProducts(state, payload){
+      state.products = payload 
+    },
+
     initialiseStore(state) {
 
       if(localStorage.getItem('theCustomer')) {
