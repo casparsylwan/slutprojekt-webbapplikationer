@@ -44,7 +44,7 @@ export default {
    computed:{
 
     getClient(){
-      return this.$store.getters.getClient
+      return this.$store.getters.getClient.name
     }
     
     
