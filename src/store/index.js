@@ -101,7 +101,20 @@ export default new Vuex.Store({
 
       const response = await axios.get('http://localhost:5000/api/orders',{ headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
       commit('getCustomerOrder', response.data)
-    }
+    },
+    async loadProducts({commit}){
+      console.log("Products loaded!")
+    await axios
+       .get("http://localhost:5000/api/products/")
+       .then(respone => {
+         let products = respone.data
+         console.log(products)
+         commit('setProducts', products)
+       })
+       .catch( error => {
+         console.log(error)
+       })
+    } 
 
   },
   getters:{
