@@ -5,11 +5,11 @@
             <router-link to="/login">Log In</router-link>
             <router-link to="/login">Create Account</router-link>
         </nav>
-        <nav class="top-nav" v-if="getClient.name.length>0">
+        <nav class="top-nav" v-if="getClient.role=='customer'">
             <a @click="logout()" href="/login">Log Out</a>
             <router-link to="/profile">My Account</router-link>
         </nav>
-        <nav class="top-nav" v-if="getClient.role=='Admin'">
+        <nav class="top-nav" v-if="getClient.role=='admin'">
             <a @click="logout()" href="/login">Log Out</a>
             <router-link to="">Admin Settings</router-link>
             <router-link to="">My Account</router-link>
@@ -25,7 +25,9 @@
                 <router-link to="/cart">Cart</router-link>
             </div>
         </nav>
+         {{ getClient.role }}
     </header>
+   
 </template>
 <script>
 export default {
