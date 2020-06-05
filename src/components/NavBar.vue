@@ -10,8 +10,8 @@
                 <h1>SINUS.</h1>
             </div>
             <div class="links">
-                <router-link to="">Shop</router-link>
-                <router-link to="">Our Values</router-link>
+                <router-link to="/shop">Shop</router-link>
+                <router-link to="/">Our Values</router-link>
                 <router-link to="">Contact</router-link>
                 <router-link to="">Cart</router-link>
             </div>

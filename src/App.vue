@@ -1,12 +1,7 @@
 <template>
   <div id="app">
     <NavBar />
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
-      <router-link to="/about">About</router-link> |
-      <router-link to="/shop">Shop</router-link>
+  
     
     <router-view/>
     
@@ -14,7 +9,7 @@
 </template>
 
 <script>
-import NavBar from "./components/NavBar.vue"
+import NavBar from "../src/components/NavBar"
 
 export default {
   components: {
