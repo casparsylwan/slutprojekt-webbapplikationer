@@ -4,6 +4,7 @@ import Login from '../views/Login';
 import Home from '../views/Home';
 import About from '../views/About';
 import Profile from '../views/Profile';
+import Shop from '../views/Shop.vue'
 
 
 
@@ -30,6 +31,11 @@ Vue.use(VueRouter)
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/shop',
+    name: 'Shop',
+    component: Shop
   }
 ]
 

@@ -2,10 +2,11 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 
-Vue.use(Vuex)
+Vue.use(Vuex, axios)
 
 export default new Vuex.Store({
   state: {
+    products: [],
     token:'',
     customer:{
        name: '',
@@ -75,6 +76,9 @@ export default new Vuex.Store({
     getCustomerOrder(state, orders){
       console.log(state.customer);
       console.log(orders);
+    },
+    setProducts(state, payload){
+      state.products = payload 
     }
   },
   actions: {
@@ -101,6 +105,19 @@ export default new Vuex.Store({
 
       const response = await axios.get('http://localhost:5000/api/orders',{ headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
       commit('getCustomerOrder', response.data)
+    },
+    async loadProducts({commit}){
+      console.log("Products loaded!")
+    await axios
+       .get("http://localhost:5000/api/products/")
+       .then(respone => {
+         let products = respone.data
+         console.log(products)
+         commit('setProducts', products)
+       })
+       .catch( error => {
+         console.log(error)
+       })
     }
 
   },
@@ -115,6 +132,8 @@ export default new Vuex.Store({
       
     // }
   },
+      
+  
   modules: {
   }
 })
