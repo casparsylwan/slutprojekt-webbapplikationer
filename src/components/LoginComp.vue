@@ -3,16 +3,16 @@
         <div class="input-box">
             <h2>Logga in</h2>
             <div class="input name">
-                <label>Name</label>
-                <input type="text" placeholder="Ditt namn" v-model="customer.name" >              
+                <label>E-post</label>
+                <input type="text" placeholder="Ditt namn" v-model="customer.email" >              
             </div>
             <div class="input email">
-                <label>E-post</label>
-                <input type="text" placeholder="Din e-post" v-model="customer.email">              
+                <label>Lösenord</label>
+                <input type="password" placeholder="Ditt hemliga" v-model="customer.password">              
             </div>
             <!--<<-->
             <div class="input btn-box">
-                <div @click="register()" class="btn">
+                <div @click="login()" class="btn">
                     <p>Logga in</p> 
                 </div>
             </div>
@@ -40,6 +40,13 @@ export default {
               zip:''
           }
       }
+  },
+  methods :{
+       login(){
+        this.customer.adress = this.adress;
+        this.$store.dispatch("loginCall", this.customer);
+       
+    }
   }
     
 }

@@ -6,37 +6,101 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    token:'',
     customer:{
+       name: '',
       email: '',
       password: '',
       repeatPassword: '',
-      name: '',
+     
       adress: {
          street: '',
          city: '',
          zip: ''
       }
+   },
+   localCustomer :{
+    name: '',
+    email: '',
+    role:'',
+    adress: {
+      street: '',
+      city: '',
+      zip: ''
+   }
+
    }
   },
   mutations: {
+
+    initialiseStore(state) {
+
+      if(localStorage.getItem('theCustomer')) {
+        let clientJson = localStorage.getItem('theCustomer');
+        let client = JSON.parse(clientJson)
+        state.localCustomer.name = client.name 
+        state.localCustomer.email = client.email
+        state.localCustomer.token = client.token;
+        
+
+      }
+    },
+
+
+/*stop*/
     registerNewCustomer(state, customer){
       state.customer.name = customer.name;
+      state.customer.email = customer.email;
+      state.customer.password = customer.password;
+      state.customer.repeatPassword = customer.repeatPassword;
       console.log(customer);
       console.log(customer.message);
       console.log(1);
+    //  console.log(state)
+      
+      
+    },
+    loginMutation(state, customer){
+      console.log(customer)
+      state.localCustomer.name = customer.user.name;
+      state.localCustomer.email = customer.user.email;
+      state.localCustomer.role = customer.user.role;      
+      state.localCustomer.token = customer.token;
+
+      console.log(state.localCustomer)
+      localStorage.setItem('theCustomer', JSON.stringify(state.localCustomer ));
+      
+      
+    },
+    getCustomerOrder(state, orders){
+      console.log(state.customer);
+      console.log(orders);
     }
   },
   actions: {
-    async newCustomer({commit}, customer){
+    async newCustomer({commit , dispatch}, customer){
 
-     // console.log(customer +1);
-     // const response = await axios.get('http://localhost:5000/');
       const response = await axios.post('http://localhost:5000/api/register', {...customer});
-    //  console.log(response.data)
       commit('registerNewCustomer', response.data)
-    // console.log(commit);
-     // console.log(resp.data)
+      if(response.status == 200){
+        dispatch("loginCall", customer);
+      }
+    
+      
+    
+    },
+    async loginCall({commit}, id){
+      
+      const response = await axios.post('http://localhost:5000/api/auth/', {...id});
+      console.log(response)
+      commit('loginMutation', response.data)
+    },
+    async getCustomerOrder({commit}){
+
+      const response = await axios.get('http://localhost:5000/api/orders',{ headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
+      commit('getCustomerOrder', response.data)
     }
+
   },
   modules: {
   }
