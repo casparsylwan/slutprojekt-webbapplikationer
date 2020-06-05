@@ -10,7 +10,7 @@
 
             <div @click="test()" class="btn1">                
                 test
-                {{ getClient }}             
+                {{ getClient.name }}             
             </div>
         
     
