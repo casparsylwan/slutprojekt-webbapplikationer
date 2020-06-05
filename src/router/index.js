@@ -16,8 +16,7 @@ Vue.use(VueRouter)
 function guardMyroute(to, from, next)
 {
  var isAuthenticated= false;
-//this is just an example. You will have to find a better or 
-// centralised way to handle you localstorage data handling 
+
 if(localStorage.getItem('theCustomer'))
   isAuthenticated = true;
  else
