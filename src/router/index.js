@@ -1,20 +1,32 @@
-import Vue from 'vue'
+import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Login from '../views/Login';
 import Home from '../views/Home';
 import About from '../views/About';
 import Profile from '../views/Profile';
-import Shop from '../views/Shop.vue'
-
-
+import Shop from '../views/Shop.vue';
+import Cart from '../views/Cart.vue';
+import Admin from "../views/Admin.vue";
+import Anonymous from "../views/Anonymous.vue";
+import Account from "../views/Account.vue";
 
 Vue.use(VueRouter)
 
   const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Anonymous',
+    component: Anonymous
+  },
+  {
+    path: '/account',
+    name: 'Account',
+    component: Account
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin
   },
   {
     path: '/login',
@@ -34,9 +46,20 @@ Vue.use(VueRouter)
   }
   ,
   {
+    path: '/home',
+    name: 'Home',
+    component: Home
+  }
+  , 
+  {
     path: '/shop',
     name: 'Shop',
     component: Shop
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
   }
 ]
 

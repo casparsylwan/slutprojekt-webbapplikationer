@@ -1,13 +1,22 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/shop">Shop</router-link>
-    </div>
+    <NavBar />
+    
     <router-view/>
+    
   </div>
 </template>
+
+<script>
+import NavBar from "../src/components/NavBar"
+
+export default {
+  components: {
+    NavBar
+  }
+}
+</script>
+
 
 <style lang="scss">
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -34,6 +43,9 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+
+body{
+  margin: 0;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
