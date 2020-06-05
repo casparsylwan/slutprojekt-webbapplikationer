@@ -58,10 +58,8 @@ export default {
 
     getClient(){
       return this.$store.getters.getClient
-    }
-    
-    
-  },
+    }   
+  }
   }
 
 </script>
@@ -69,7 +67,7 @@ export default {
     .login{
         position:relative;
 
-        min-height: 100vh;
+        min-height: 86vh;
         
         background-image: /*linear-gradient( rgba(255, 255, 0, 0.5) , rgba(0, 0, 255, 0.5) ),*/ url('../assets/moutain.jpg') ;//'../assets/iland.jpg'
          background-position: center center;
