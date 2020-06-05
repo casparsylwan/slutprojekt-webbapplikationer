@@ -107,9 +107,9 @@ export default {
                     background-image: url(../assets/arrow.png);
                     background-repeat: no-repeat;
                     background-position: 98% 95%;
-                    option {
+                    // option {
                         
-                    }
+                    // }
                 }
 
                 

@@ -39,11 +39,13 @@ if(localStorage.getItem('theCustomer'))
   {
     path: '/account',
     name: 'Account',
+    beforeEnter : guardMyroute,
     component: Account
   },
   {
     path: '/admin',
     name: 'Admin',
+    beforeEnter : guardMyroute,
     component: Admin
   },
   {

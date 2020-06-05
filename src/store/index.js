@@ -35,6 +35,7 @@ export default new Vuex.Store({
   mutations: {
 
     setProducts(state, payload){
+      console.log(payload)
       state.products = payload 
     },
 
