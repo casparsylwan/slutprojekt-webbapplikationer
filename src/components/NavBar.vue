@@ -49,6 +49,7 @@ export default {
             display: flex;
             justify-content: flex-end;
             padding: 2px 1rem;
+            border:solid black 2px;
             
             a{
                 text-decoration: none;
