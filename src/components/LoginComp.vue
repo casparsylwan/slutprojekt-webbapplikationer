@@ -41,11 +41,20 @@ export default {
           }
       }
   },
+   computed:{
+
+    getClient(){
+      return this.$store.getters.getClient
+    }
+    
+    
+  },
   methods :{
        login(){
         this.customer.adress = this.adress;
         this.$store.dispatch("loginCall", this.customer);
-       
+        
+        
     }
   }
     

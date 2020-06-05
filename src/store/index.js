@@ -61,13 +61,13 @@ export default new Vuex.Store({
       
     },
     loginMutation(state, customer){
-      console.log(customer)
+    //  console.log(customer)
       state.localCustomer.name = customer.user.name;
       state.localCustomer.email = customer.user.email;
       state.localCustomer.role = customer.user.role;      
       state.localCustomer.token = customer.token;
 
-      console.log(state.localCustomer)
+    //  console.log(state.localCustomer)
       localStorage.setItem('theCustomer', JSON.stringify(state.localCustomer ));
       
       
@@ -84,6 +84,7 @@ export default new Vuex.Store({
       commit('registerNewCustomer', response.data)
       if(response.status == 200){
         dispatch("loginCall", customer);
+        
       }
     
       
@@ -92,8 +93,9 @@ export default new Vuex.Store({
     async loginCall({commit}, id){
       
       const response = await axios.post('http://localhost:5000/api/auth/', {...id});
-      console.log(response)
+    //  console.log(response)
       commit('loginMutation', response.data)
+      return response.status
     },
     async getCustomerOrder({commit}){
 
@@ -101,6 +103,17 @@ export default new Vuex.Store({
       commit('getCustomerOrder', response.data)
     }
 
+  },
+  getters:{
+
+    getClient(state){
+      return state.localCustomer;
+    }
+    //,
+    // getOrder(state){
+      
+      
+    // }
   },
   modules: {
   }

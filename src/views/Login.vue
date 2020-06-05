@@ -9,7 +9,8 @@
             </div>
 
             <div @click="test()" class="btn1">                
-                test              
+                test
+                {{ getClient }}             
             </div>
         
     
@@ -52,7 +53,15 @@ export default {
         console.log("hej");
         this.$store.dispatch("getCustomerOrder");       
     }
-      }
+      },
+   computed:{
+
+    getClient(){
+      return this.$store.getters.getClient
+    }
+    
+    
+  },
   }
 
 </script>
