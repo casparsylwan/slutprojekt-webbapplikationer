@@ -95,7 +95,7 @@ export default new Vuex.Store({
       const response = await axios.post('http://localhost:5000/api/auth/', {...id});
     //  console.log(response)
       commit('loginMutation', response.data)
-      return response.status
+    //  return response.status
     },
     async getCustomerOrder({commit}){
 
