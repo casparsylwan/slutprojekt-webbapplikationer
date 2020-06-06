@@ -46,17 +46,18 @@ export default {
   components: {
  
   },
+  props:['product'],
   data(){
       return {
 
-          /**Product interface */
-          product : {
-                    title: '',
-                    price: 0,
-                    shortDesc: '',
-                    longDesc: '',
-                    imgFile: ''
-                    }    
+          // /**Product interface */
+          // product : {
+          //           title: '',
+          //           price: 0,
+          //           shortDesc: '',
+          //           longDesc: '',
+          //           imgFile: ''
+          //           }    
             }
         },
         methods:{

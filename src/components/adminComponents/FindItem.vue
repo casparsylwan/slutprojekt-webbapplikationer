@@ -12,7 +12,7 @@
                 <th>Namn</th>
                 <th>pris</th>                
             </tr>
-            <tr :key="product.name" v-for="product in filter" @click="getItemToChange( product._id)">
+            <tr :key="product.name" v-for="product in filter" @click="$emit('productItem', product)">
                 <td> {{ product._id }} </td>
                 <td>{{ product.title }}</td> 
                 <td>{{ product.price }}</td>              
@@ -52,9 +52,13 @@ export default {
            'products'
        ]),
        filter(){
-           let searchList = this.products.filter(prod => prod.title.toUpperCase().includes(this.searchTitle.toUpperCase()))
+           
+           let searchList = this.getProducts.filter(prod => prod.title.toUpperCase().includes(this.searchTitle.toUpperCase()))
            return searchList
-        }
+        },
+        getProducts(){
+            return this.$store.getters.getProducts
+    }
     },
     mounted(){
       this.$store.dispatch('loadProducts')
@@ -121,7 +125,9 @@ table{
 
         tr{
             height: 2rem;
-            
+             &:nth-child(even){
+                background-color: #777;
+            }
         }
 
         td{
@@ -129,9 +135,11 @@ table{
             text-align: start;
             padding-left: 1rem;
             vertical-align: middle;
-
+           
            
         }
+
+        
 
     }
 

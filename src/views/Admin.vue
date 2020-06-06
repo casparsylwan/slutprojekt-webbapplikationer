@@ -3,8 +3,8 @@
     <section>
       <article class="background">
         <Profile class="profile"></Profile>
-        <FindItem class="find" />
-        <Crud class="crud"></Crud>
+        <FindItem class="find"  @productItem="setProduct" />
+        <Crud class="crud" :product="product" ></Crud>
       </article>
       
     </section>
@@ -25,7 +25,25 @@ export default {
     Profile,
     Crud,
     FindItem
-  }
+  },
+  data(){
+      return {
+
+          /**Product interface */
+          product : {
+                    title: '',
+                    price: 0,
+                    shortDesc: '',
+                    longDesc: '',
+                    imgFile: ''
+                    }    
+            }
+        },
+        methods:{
+          setProduct(product){
+            this.product = product;
+          }
+        }
 }
 </script>
 
@@ -39,17 +57,17 @@ export default {
     display: flex;
 
     .profile{
-      flex-grow: 3;
+      flex-grow: 1;
       
     }
 
     .find {
-      flex-grow: 1;
+      flex-grow: 2;
       border-right:solid 1px #222;
     }
     
     .crud{
-      flex-grow: 1;
+      flex-grow: 2;
       
     }
   }
