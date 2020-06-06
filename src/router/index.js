@@ -12,22 +12,22 @@ import Account from "../views/Account.vue";
 
 Vue.use(VueRouter)
 
+function guardMyroute(to, from, next){
 
-function guardMyroute(to, from, next)
-{
- var isAuthenticated= false;
+ // let isAuthenticated= false;
 
-if(localStorage.getItem('theCustomer'))
-  isAuthenticated = true;
- else
-  isAuthenticated= false; if(isAuthenticated) 
- {
-  next(); // allow to enter route
- } 
- else
- {
-  next('/login'); // go to '/login';
- }
+  if(localStorage.getItem('theCustomer')){
+    let clientJson = localStorage.getItem('theCustomer');
+    let client = JSON.parse(clientJson);
+    if(client.role === 'admin'){
+      next();
+    }else if(client.role === 'customer'){
+      next();
+    }
+    
+  }else{
+    next('/login');
+  }
 }
 
   const routes = [
