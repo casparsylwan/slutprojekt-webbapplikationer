@@ -12,6 +12,11 @@
         
       </div>
       <div class="element-input">
+        <label >Bild länk</label>
+        <input type="text" onfocus="this.value=''" placeholder="Länk till fotot" v-model="product.imgFile">
+        
+      </div>
+      <div class="element-input">
         <label >Kort beskrivning</label>
         <input type="text" onfocus="this.value=''" placeholder="Kort produkt beskrivning" v-model="product.shortDesc">
         

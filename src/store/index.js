@@ -6,6 +6,7 @@ Vue.use(Vuex, axios)
 
 export default new Vuex.Store({
   state: {
+    products: [],
     token:'',
     customer:{
        name: '',
@@ -29,14 +30,19 @@ export default new Vuex.Store({
       zip: ''
    }
 
-   },
-   products: []
+   }   
   },
   mutations: {
 
     setProducts(state, payload){
       console.log(payload)
-      state.products = payload 
+      state.products = []
+      for(let i=0; i<payload.length; i++)
+      {
+        console.log(payload[i].price)
+        payload[i].price = Number(payload[i].price)
+        state.products.push(payload[i])
+      }
     },
 
     initialiseStore(state) {
@@ -122,16 +128,19 @@ export default new Vuex.Store({
 
     async loadProducts({commit}){
       console.log("Products loaded!")
-    await axios
-       .get("http://localhost:5000/api/products/")
-       .then(respone => {
-         let products = respone.data
-         console.log(products)
-         commit('setProducts', products)
-       })
-       .catch( error => {
-         console.log(error)
-       })
+      const response = await axios.get("http://localhost:5000/api/products/");
+      console.log(response.data)
+      commit('setProducts', response.data)
+    // await axios
+    //    .get("http://localhost:5000/api/products/")
+    //    .then(respone => {
+    //      let products = respone.data
+    //      console.log(products)
+    //      commit('setProducts', products)
+    //    })
+    //    .catch( error => {
+    //      console.log(error)
+    //    })
     } 
 
   },
@@ -139,7 +148,10 @@ export default new Vuex.Store({
 
     getClient(state){
       return state.localCustomer;
-    }
+    },
+    getProducts(state){
+      return state.products;
+    },
     //,
     // getOrder(state){
       

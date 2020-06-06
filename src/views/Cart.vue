@@ -8,7 +8,10 @@
             :title="product.title"
             :shortDesc="product.shortDesc"
             :price="product.price"
-            :imgFile="product.imgFile"/>
+            :imgFile="product.imgFile"
+            />
+            
+            <!--   -->
         </article>
         <article class="order">
             <h1>Order Details</h1>
@@ -41,7 +44,6 @@ export default {
     methods: {
 
     },
-
     computed: {
         ...mapState([
            'products'

@@ -3,6 +3,7 @@
     <section>
       <article class="background">
         <Profile class="profile"></Profile>
+        <FindItem class="find" />
         <Crud class="crud"></Crud>
       </article>
       
@@ -14,14 +15,16 @@
 <script>
 import Footer from "../components/Footer";
 import Profile from '../components/adminComponents/AdminPresentation';
-import Crud from '../components/adminComponents/CrudItems'
+import Crud from '../components/adminComponents/CrudItems';
+import FindItem from '../components/adminComponents/FindItem';
 
 export default {
   name: 'Admin',
   components: {
     Footer,
     Profile,
-    Crud
+    Crud,
+    FindItem
   }
 }
 </script>
@@ -36,13 +39,18 @@ export default {
     display: flex;
 
     .profile{
-      flex-grow: 2;
-      border: solid black 1px;
+      flex-grow: 3;
+      
+    }
+
+    .find {
+      flex-grow: 1;
+      border-right:solid 1px #222;
     }
     
     .crud{
       flex-grow: 1;
-      border: solid black 1px;
+      
     }
   }
 </style>
