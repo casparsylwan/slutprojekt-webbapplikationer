@@ -55,7 +55,7 @@ export default {
        login(){
         this.customer.adress = this.adress;
         let prom = this.$store.dispatch("loginCall", this.customer);
-        console.log(prom.then(res =>{
+        console.log(prom.then((res) =>{
             console.log(res);
               if(this.getClient.email.length>0 && this.getClient.role === 'customer'){
                 this.$router.push({ path: '/account'})
@@ -63,6 +63,7 @@ export default {
                 else if(this.getClient.email.length>0 && this.getClient.role === 'admin'){
                     this.$router.push({ path: '/admin'})
                 }
+                
         }))       
     }
   },

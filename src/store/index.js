@@ -46,6 +46,7 @@ export default new Vuex.Store({
         let client = JSON.parse(clientJson)
         state.localCustomer.name = client.name 
         state.localCustomer.email = client.email
+        state.localCustomer.role = client.role
         state.localCustomer.token = client.token;
         
 

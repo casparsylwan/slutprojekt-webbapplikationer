@@ -1,19 +1,23 @@
 <template>
   <div class="admin">
     <section>
-      <article class="background"></article>
+      <article class="background">
+        <Profile></Profile>
+      </article>
       <Footer />
     </section>
   </div>
 </template>
 
 <script>
-import Footer from "../components/Footer"
+import Footer from "../components/Footer";
+import Profile from '../components/adminComponents/AdminPresentation';
 
 export default {
   name: 'Admin',
   components: {
-    Footer
+    Footer,
+    Profile
   }
 }
 </script>
@@ -21,7 +25,7 @@ export default {
 <style lang="scss" scoped>
   .background {
     background-image: url("../assets/background.jpg");
-    height: 900px;
+    min-height: 86vh;
     background-size: cover;
     background-repeat: no-repeat;
     

@@ -17,6 +17,7 @@ export default {
 
 <style>
     footer {
-        height: 120px;
+        height: 20px;
+        background-color: black;
     }
 </style>

@@ -23,6 +23,8 @@ function guardMyroute(to, from, next){
       next();
     }else if(client.role === 'customer'){
       next();
+    }else{
+      next('/login');
     }
     
   }else{

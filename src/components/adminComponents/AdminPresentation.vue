@@ -48,7 +48,7 @@ export default {
 </script>
 <style lang="scss" scoped>
     .customer-profile{
-        min-height: 100vh;
+        
 
         display: flex;
         justify-content: center;
