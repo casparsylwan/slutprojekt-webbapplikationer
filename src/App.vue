@@ -75,4 +75,11 @@ table {
 a{
   text-decoration: none;
 }
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
 </style>

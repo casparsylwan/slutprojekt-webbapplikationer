@@ -82,6 +82,10 @@ export default new Vuex.Store({
     getCustomerOrder(state, orders){
       console.log(state.customer);
       console.log(orders);
+    },
+    addProducts(state, product){
+      console.log(state)
+      console.log(product)
     }
   },
   actions: {
@@ -109,6 +113,13 @@ export default new Vuex.Store({
       const response = await axios.get('http://localhost:5000/api/orders',{ headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
       commit('getCustomerOrder', response.data)
     },
+    //Products start here
+    async addProduct({commit}, product){
+
+      const response = await axios.post('http://localhost:5000/api/products/',{...product},{ headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
+      commit('addProducts', response.data)
+    },
+
     async loadProducts({commit}){
       console.log("Products loaded!")
     await axios
