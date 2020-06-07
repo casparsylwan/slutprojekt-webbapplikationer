@@ -1,29 +1,40 @@
 <template>
   <div class="crud">
+    
       <h2>Ändra Bland produkter</h2>
+      <div class="radio">
+        <div class="radio-box">
+          <input type="radio" name="typeOfUpdate" value="update" :checked="product._id" @click="cleanDataNewProduct()">
+          <label >updatera</label>
+        </div>
+        <div class="radio-box">
+          <input id="id" type="radio" name="typeOfUpdate" :value="!product._id" :checked="!product._id" @click="cleanDataNewProduct()">
+          <label >Ny produkt</label>
+        </div>  
+      </div>
       <div class="element-input">
         <label >Produkt title</label>
-        <input type="text" onfocus="this.placeholder=''" placeholder="Produkt title" v-model="product.title">
+        <input id="title" type="text" onfocus="this.placeholder=''" placeholder="Produkt title" :value="product.title">
         
       </div>
       <div class="element-input">
         <label >pris</label>
-        <input type="number" min="1" onfocus="this.value=1" v-model="product.price">
+        <input id="price" type="number" min="1" onfocus="this.value=1" :value="product.price">
         
       </div>
       <div class="element-input">
         <label >Bild länk</label>
-        <input type="text" onfocus="this.value=''" placeholder="Länk till fotot" v-model="product.imgFile">
+        <input id="file" type="text" onfocus="this.value=''" placeholder="Länk till fotot" :value="product.imgFile">
         
       </div>
       <div class="element-input">
         <label >Kort beskrivning</label>
-        <input type="text" onfocus="this.value=''" placeholder="Kort produkt beskrivning" v-model="product.shortDesc">
+        <input id="short" type="text" onfocus="this.value=''" placeholder="Kort produkt beskrivning" :value="product.shortDesc">
         
       </div>
       <div class="element-input">
         <label> Lång beskrivning </label>
-        <textarea rows="10" v-model="product.longDesc"></textarea>
+        <textarea id="long" rows="10" :value="product.longDesc"></textarea>
         {{ product.longDesc }}
       </div>
       <div class="element-input btn-box">
@@ -49,21 +60,36 @@ export default {
   props:['product'],
   data(){
       return {
+        newItem:true,
+        
+        index:1,
+         product2 : {...this.product2}    
 
-          // /**Product interface */
-          // product : {
-          //           title: '',
-          //           price: 0,
-          //           shortDesc: '',
-          //           longDesc: '',
-          //           imgFile: ''
-          //           }    
+         
             }
         },
         methods:{
 
             registerProduct(){
+              if(!this.newItem){
                 this.$store.dispatch("addProduct", this.product);
+              }else if(this.newItem){
+                console.log(this.product)
+              }else{
+                console.log("Error")
+              }
+                
+            },
+            cleanDataNewProduct(){
+              this.newItem = !this.newItem
+             console.log(document.getElementById("title").value)
+              document.getElementById("id").value = null 
+              document.getElementById("price").value= 0
+              document.getElementById("file").value= ""
+              document.getElementById("title").value= ""
+              document.getElementById("short").value= ""
+              document.getElementById("long").value= ""
+
             }
 
             } 
@@ -85,6 +111,14 @@ export default {
         font-weight: bold;
         font-size: 2rem;
         margin-top:1.5rem;
+    }
+
+    .radio{
+      display: flex;
+      justify-content: space-evenly;
+      width: 70%;
+      padding: 1rem;
+      
     }
     
     .element-input{
@@ -117,7 +151,8 @@ export default {
                 font-size: 1.5rem;
                 font-weight: bold;
                 text-align: center;
-            }            
+            } 
+            
         }
 
     }
@@ -134,5 +169,10 @@ export default {
             background-color: #f71;
 
             text-align: center;
+
+            p{
+              font-size:1.5rem;
+              font-weight: bold;
+            }
         }
 </style>
