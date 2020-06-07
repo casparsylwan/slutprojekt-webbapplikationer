@@ -1,5 +1,5 @@
 <template>
-  <div class="product" v-on:click="openPopup">
+  <div class="product" >
     <h1 class="title">{{product.title}}</h1>
     <div class="product-info">
       <h2 class="short-desc">{{product.shortDesc}}</h2>
@@ -18,25 +18,27 @@ export default {
   },
 
   methods: {
-    closePopup() {
-      console.log("closed popup");
-      document.getElementById("popup").style.display = "none";
-    },
-    openPopup() {
-      console.log("open popup");
-      document.getElementById("popup").style.display = "block";
-    }
+    // closePopup() {
+    //   console.log("closed popup");
+    //   document.getElementById("popup").style.display = "none";
+    // },
+    // openPopup() {
+    //   console.log("open popup");
+    //   document.getElementById("popup").style.display = "block";
+    // }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .product {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  width: 15rem;
-  cursor: pointer;
+    box-sizing: border-box;
+    padding: 1rem;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 20rem;
+    cursor: pointer;
 
   .product-info {
     width: 100%;
@@ -44,11 +46,16 @@ export default {
     justify-content: space-between;
     flex-direction: row;
   }
+  &:hover{
+      border-radius: 1rem;
+      border-color: grey;
+      border-style: solid;
+  }
 
   .pic-container {
     width: 100%;
 
-    background-color: grey;
+    // background-color: grey;
     display: flex;
     align-items: flex-end;
 
