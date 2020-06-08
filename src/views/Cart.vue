@@ -8,7 +8,9 @@
             :title="product.title"
             :shortDesc="product.shortDesc"
             :price="product.price"
-            :imgFile="product.imgFile"/>
+            :imgFile="product.imgFile"
+            :id="product._id"
+            :amount="product.amount"/>
         </article>
         <article class="order">
             <h1>Order Details</h1>
@@ -16,13 +18,13 @@
                 <label>Shipping</label>
                 <select id="select">
                     <option value="Posten">Posten(49kr)</option>
-                    <option value="DB Schenker">DB Schenker(99kr)</option>
+                    <option value="DB Schenker">Schenker(99kr)</option>
                     <option value="DHL">DHL(119kr)</option>
                 </select>
             </div>
             <hr>
             <h3>Total Cost</h3>
-            <h2>2500.00 KR</h2>
+            <h2>{{getProductSum}}</h2>
             <button>Checkout</button>
         </article>
     </section>
@@ -35,17 +37,26 @@ export default {
         CartItem
     },
     data: () => ({
-
+       
     }),
     
     methods: {
-
+        getProductFromCart(id) {
+            let obj = this.$store.state.products.filter(
+                product => product._id == id
+            )[0];
+            return obj;
+        }
     },
 
     computed: {
         ...mapState([
            'products'
-       ])
+       ]),
+
+       getProductSum() {
+           return this.$store.getters.getProductSum;
+       }
     },
     mounted(){
       this.$store.dispatch('loadProducts')

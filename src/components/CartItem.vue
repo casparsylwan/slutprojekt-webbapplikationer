@@ -8,9 +8,9 @@
             <p class="desc">{{shortDesc}}</p>
         </div>
         <div class="amount">
-            <img src="../assets/minus-solid.svg" alt="">
-            <input type="text" value="0">
-            <img src="../assets/plus-solid.svg" alt="">
+            <img @click="decrementAmount" src="../assets/minus-solid.svg" alt="">
+            <input type="text" :value="amount">
+            <img @click="incrementAmount" src="../assets/plus-solid.svg" alt="">
         </div>
         <div class="price">
             <p>{{price}} KR</p>
@@ -24,17 +24,42 @@
 <script>
 export default {
     props: {
+        id: String,
         title: String,
         shortDesc: String,
         price: Number,
-        imgFile: String
+        imgFile: String,
+        amount: Number
     },
     data: () => ({
-
+        
     }),
     
     methods: {
+        // decrementAmount() {
+        //     if(this.amount > 0){
+        //         this.amount--;
+        //     }
+        // },
 
+        // incrementAmount() {
+        //     this.amount++;
+        // },
+
+        incrementAmount() {
+            this.$store.commit("incrementProductAmount", {
+                id: this.id,
+                price: this.price,
+                
+            });
+        },
+
+        decrementAmount() {
+            this.$store.commit("decrementProductAmount", {
+                id: this.id,
+                price: this.price
+            });
+        }
     }
 }
 </script>

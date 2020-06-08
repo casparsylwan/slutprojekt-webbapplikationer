@@ -7,11 +7,27 @@ Vue.use(Vuex, axios)
 export default new Vuex.Store({
   state: {
     products: [],
+    productSum: 0,
+    
   },
   mutations: {
     setProducts(state, payload){
       state.products = payload 
-    }
+    },
+
+    incrementProductAmount(state, payload) {
+      let obj = state.products.filter(product => product._id == payload.id)[0];
+      obj.amount++;
+      state.productSum += payload.price;
+    },
+
+    decrementProductAmount(state, payload) {
+      let obj = state.products.filter(product => product._id == payload.id)[0];
+      obj.amount--;
+      state.productSum -= payload.price;
+    },
+
+
   
   },
   actions: {
@@ -29,6 +45,15 @@ export default new Vuex.Store({
        })
     }
   },  
+
+  getters: {
+    getProductSum(state) {
+      state.products.forEach(product => {
+        state.productSum += product.price;
+      })
+      return state.productSum;
+    }
+  },
   
   modules: {
   }
