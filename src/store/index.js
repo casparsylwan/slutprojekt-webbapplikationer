@@ -30,7 +30,8 @@ export default new Vuex.Store({
       zip: ''
    }
 
-   }   
+   },   
+    cart: [],
   },
   mutations: {
 
@@ -144,18 +145,17 @@ export default new Vuex.Store({
     async loadProducts({commit}){
       console.log("Products loaded!")
       const response = await axios.get("http://localhost:5000/api/products/");
-      
       commit('setProducts', response.data)
-    // await axios
-    //    .get("http://localhost:5000/api/products/")
-    //    .then(respone => {
-    //      let products = respone.data
-    //      console.log(products)
-    //      commit('setProducts', products)
-    //    })
-    //    .catch( error => {
-    //      console.log(error)
-    //    })
+    await axios
+       .get("http://localhost:5000/api/products/")
+       .then(respone => {
+         let products = respone.data
+         console.log(products)
+         commit('setProducts', products)
+       })
+       .catch( error => {
+         console.log(error)
+       })
     },
     
     async deleteProduct({dispatch }, id){
@@ -184,6 +184,7 @@ export default new Vuex.Store({
       
     // }
   },
+    
   modules: {
   }
 })
