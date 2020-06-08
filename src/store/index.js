@@ -52,6 +52,10 @@ export default new Vuex.Store({
         state.productSum += product.price;
       })
       return state.productSum;
+    },
+
+    getProducts(state) {
+      return state.products;
     }
   },
   
