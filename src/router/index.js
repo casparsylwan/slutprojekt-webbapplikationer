@@ -5,6 +5,7 @@ import Account from "../views/Account.vue"
 import Admin from "../views/Admin.vue"
 import Shop from '../views/Shop.vue'
 import Home from '../views/Home.vue'
+import Cart from '../views/Cart.vue'
 
 
 Vue.use(VueRouter)
@@ -29,6 +30,11 @@ Vue.use(VueRouter)
     path: '/home',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
   },
   // {
   //   path: '/about',

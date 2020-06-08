@@ -13,7 +13,7 @@
                 <router-link to="/shop">Shop</router-link>
                 <router-link to="/">Our Values</router-link>
                 <router-link to="">Contact</router-link>
-                <router-link to="">Cart</router-link>
+                <router-link to="/cart">Cart</router-link>
             </div>
         </nav>
     </header>

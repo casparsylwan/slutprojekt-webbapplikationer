@@ -7,6 +7,7 @@ Vue.use(Vuex, axios)
 export default new Vuex.Store({
   state: {
     products: [],
+    cart: [],
   },
   mutations: {
     setProducts(state, payload){
@@ -27,9 +28,13 @@ export default new Vuex.Store({
        .catch( error => {
          console.log(error)
        })
-    }
-  },  
-  
+    },
+    // addToCart({ commit }, product){
+    //   commit(types.ADD_TO_CART, {
+    //     id: product.id
+    //   })
+    // }
+  },   
   modules: {
   }
 })
