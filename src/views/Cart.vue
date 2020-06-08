@@ -3,14 +3,10 @@
         <article class="cart">
             <h1>Shopping Cart</h1>
             <CartItem class="item"
-            v-for="(product, index) in products"
+            v-for="(product, index) in getProducts"
             :key="index"
-            :title="product.title"
-            :shortDesc="product.shortDesc"
-            :price="product.price"
-            :imgFile="product.imgFile"
-            :id="product._id"
-            :amount="product.amount"/>
+            :product="product"
+           />
         </article>
         <article class="order">
             <h1>Order Details</h1>
@@ -31,7 +27,7 @@
 </template>
 <script>
 import CartItem from "../components/CartItem"
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 export default {
     components: {
         CartItem
@@ -46,21 +42,25 @@ export default {
                 product => product._id == id
             )[0];
             return obj;
-        }
+        },
     },
 
     computed: {
-        ...mapState([
-           'products'
-       ]),
+    //     ...mapState([
+    //        'products'
+    //    ]),
+
+       getProducts() {
+           return this.$store.getters.getProducts;
+       },
 
        getProductSum() {
-           return this.$store.getters.getProductSum;
-       }
+           return this.$store.getters.getProductSum
+        }
     },
-    mounted(){
-      this.$store.dispatch('loadProducts')
-    }
+    // mounted(){
+    //   this.$store.dispatch('loadProducts')
+    // }
 }
 </script>
 

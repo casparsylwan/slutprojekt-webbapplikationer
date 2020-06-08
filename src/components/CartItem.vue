@@ -1,19 +1,19 @@
 <template>
     <div class="cartItem">
         <div class="image">
-            <img :src="require('@/assets/' + imgFile)" alt="">
+            <img :src="require('@/assets/' + product.item.imgFile)" alt="">
         </div>
         <div class="title-desc">
-            <h3>{{title}}</h3>
-            <p class="desc">{{shortDesc}}</p>
+            <h3>{{product.item.title}}</h3>
+            <p class="desc">{{product.item.shortDesc}}</p>
         </div>
         <div class="amount">
             <img @click="decrementAmount" src="../assets/minus-solid.svg" alt="">
-            <input type="text" :value="amount">
+            <input type="text" :value="product.amount">
             <img @click="incrementAmount" src="../assets/plus-solid.svg" alt="">
         </div>
         <div class="price">
-            <p>{{price}} KR</p>
+            <p>{{product.item.price}} KR</p>
         </div> 
         <div class="remove">
             <img src="../assets/remove.png" alt="">
@@ -24,43 +24,24 @@
 <script>
 export default {
     props: {
-        id: String,
-        title: String,
-        shortDesc: String,
-        price: Number,
-        imgFile: String,
-        amount: Number
+        product: Object
     },
     data: () => ({
-        
     }),
     
     methods: {
-        // decrementAmount() {
-        //     if(this.amount > 0){
-        //         this.amount--;
-        //     }
-        // },
-
-        // incrementAmount() {
-        //     this.amount++;
-        // },
-
+        
         incrementAmount() {
-            this.$store.commit("incrementProductAmount", {
-                id: this.id,
-                price: this.price,
-                
-            });
+            this.$store.commit("incrementAmountAndSum", this.product);
         },
 
         decrementAmount() {
-            this.$store.commit("decrementProductAmount", {
-                id: this.id,
-                price: this.price
-            });
+            if(this.product.amount > 0){
+                this.$store.commit("decrementAmountAndSum", this.product)
+            }
         }
-    }
+    },
+
 }
 </script>
 
