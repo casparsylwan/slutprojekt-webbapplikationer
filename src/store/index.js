@@ -35,11 +35,11 @@ export default new Vuex.Store({
   mutations: {
 
     setProducts(state, payload){
-      console.log(payload)
+      // console.log(payload)
       state.products = []
       for(let i=0; i<payload.length; i++)
       {
-        console.log(payload[i].price)
+      //  console.log(payload[i].title)
         payload[i].price = Number(payload[i].price)
         state.products.push(payload[i])
       }
@@ -66,9 +66,9 @@ export default new Vuex.Store({
       state.customer.email = customer.email;
       state.customer.password = customer.password;
       state.customer.repeatPassword = customer.repeatPassword;
-      console.log(customer);
-      console.log(customer.message);
-      console.log(1);
+      // console.log(customer);
+      // console.log(customer.message);
+      // console.log(1);
     //  console.log(state)
       
       
@@ -110,9 +110,9 @@ export default new Vuex.Store({
     async loginCall({commit}, id){
       
       const response = await axios.post('http://localhost:5000/api/auth/', {...id});
-    //  console.log(response)
+    
       commit('loginMutation', response.data)
-    //  return response.status
+    
     },
     async getCustomerOrder({commit}){
 
@@ -120,16 +120,31 @@ export default new Vuex.Store({
       commit('getCustomerOrder', response.data)
     },
     //Products start here
-    async addProduct({commit}, product){
+    async addProduct({commit, dispatch}, product){
 
       const response = await axios.post('http://localhost:5000/api/products/',{...product},{ headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
       commit('addProducts', response.data)
+      if(response.status == 200){
+        
+        dispatch("loadProducts");
+        
+      }
+    },
+    async updateProduct({commit, dispatch}, product, id){
+      console.log(product)
+      const response = await axios.patch(`http://localhost:5000/api/products/:${id}`,{...product},{ headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
+      commit('addProducts', response.data)
+      if(response.status == 200){
+        
+        dispatch("loadProducts");
+        
+      }
     },
 
     async loadProducts({commit}){
       console.log("Products loaded!")
       const response = await axios.get("http://localhost:5000/api/products/");
-      console.log(response.data)
+      
       commit('setProducts', response.data)
     // await axios
     //    .get("http://localhost:5000/api/products/")
@@ -141,7 +156,18 @@ export default new Vuex.Store({
     //    .catch( error => {
     //      console.log(error)
     //    })
-    } 
+    },
+    
+    async deleteProduct({dispatch }, id){
+
+      const response = await axios.delete(`http://localhost:5000/api/products/:${id}`,{ headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
+      console.log(response.data)
+      if(response.status == 200){
+        
+        dispatch("loadProducts");
+        
+      }
+    }
 
   },
   getters:{

@@ -12,6 +12,27 @@ import Account from "../views/Account.vue";
 
 Vue.use(VueRouter)
 
+function guardAdminRoute(to, from, next){
+
+  // let isAuthenticated= false;
+ 
+   if(localStorage.getItem('theCustomer')){
+     let clientJson = localStorage.getItem('theCustomer');
+     let client = JSON.parse(clientJson);
+     if(client.role === 'admin'){
+       next();
+     }else if(client.role === 'customer'){
+       next('/account');
+     }else{
+       next('/login');
+     }
+     
+   }else{
+     next('/login');
+   }
+ }
+ 
+
 function guardMyroute(to, from, next){
 
  // let isAuthenticated= false;
@@ -20,7 +41,7 @@ function guardMyroute(to, from, next){
     let clientJson = localStorage.getItem('theCustomer');
     let client = JSON.parse(clientJson);
     if(client.role === 'admin'){
-      next();
+      next('/admin');
     }else if(client.role === 'customer'){
       next();
     }else{
@@ -47,7 +68,7 @@ function guardMyroute(to, from, next){
   {
     path: '/admin',
     name: 'Admin',
-    beforeEnter : guardMyroute,
+    beforeEnter : guardAdminRoute,
     component: Admin
   },
   {

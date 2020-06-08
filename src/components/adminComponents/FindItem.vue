@@ -10,12 +10,14 @@
             <tr>
                 <th>Product id</th>
                 <th>Namn</th>
-                <th>pris</th>                
+                <th>pris</th>
+                <th>ta bort</th>                
             </tr>
-            <tr :key="product.name" v-for="product in filter" @click="$emit('productItem', product)">
-                <td> {{ product._id }} </td>
-                <td>{{ product.title }}</td> 
-                <td>{{ product.price }}</td>              
+            <tr :key="product.name" v-for="product in filter">
+                <td @click="$emit('productItem', product)" > {{ product._id }} </td>
+                <td @click="$emit('productItem', product)">{{ product.title }}</td> 
+                <td @click="$emit('productItem', product)">{{ product.price }}</td>
+                <td @click="removeItem(product._id)"> X </td>              
             </tr>    
         </table>
      </div>
@@ -39,12 +41,11 @@ export default {
         }
 
     },
-    methods: {
-
-        getItemToChange( id){
-            console.log(id);
-        },
+    methods: {  
         
+        removeItem(id){
+            this.$store.dispatch("deleteProduct", id);
+        }
 
     },
     computed: {
@@ -62,7 +63,7 @@ export default {
     },
     mounted(){
       this.$store.dispatch('loadProducts')
-      console.log(this.products)
+      
     }
 }
 </script>
@@ -135,8 +136,13 @@ table{
             text-align: start;
             padding-left: 1rem;
             vertical-align: middle;
-           
-           
+                      
+        }
+
+        td:nth-child(4){
+            color:#b00;
+            font-weight: bolder;
+            text-align: center;
         }
 
         

@@ -4,13 +4,26 @@
       <h2>Ändra Bland produkter</h2>
       <div class="radio">
         <div class="radio-box">
-          <input type="radio" name="typeOfUpdate" value="update" :checked="product._id" @click="cleanDataNewProduct()">
+          <input type="radio"  
+            v-model="update" value="0"
+          >
+
+        <!--
+          :checked="!product._id"
+          :checked="product._id"
+          disabled="true"
+          -->
+
+
           <label >updatera</label>
         </div>
-        <div class="radio-box">
-          <input id="id" type="radio" name="typeOfUpdate" :value="!product._id" :checked="!product._id" @click="cleanDataNewProduct()">
-          <label >Ny produkt</label>
-        </div>  
+        <div class="radio-box" >
+          <input id="id" type="radio"  
+            v-model="update" value="1" @click="cleanDataNewProduct(update)"
+            >
+          <label>Ny produkt</label>
+        </div> 
+        {{ update }} 
       </div>
       <div class="element-input">
         <label >Produkt title</label>
@@ -51,7 +64,6 @@
 
 <script>
 
-
 export default {
   name: 'Crud',
   components: {
@@ -60,10 +72,10 @@ export default {
   props:['product'],
   data(){
       return {
-        newItem:true,
+        update:1,
         
         index:1,
-         product2 : {...this.product2}    
+         product2 : {}    
 
          
             }
@@ -71,19 +83,30 @@ export default {
         methods:{
 
             registerProduct(){
-              if(!this.newItem){
-                this.$store.dispatch("addProduct", this.product);
-              }else if(this.newItem){
-                console.log(this.product)
+              console.log(this.update)
+              if( this.update == 1){              
+                console.log("new")
+              this.product2.price     =   document.getElementById("price").value
+              this.product2.imgFile   =   document.getElementById("file").value
+              this.product2.title     =   document.getElementById("title").value
+              this.product2.shortDesc =   document.getElementById("short").value
+              this.product2.longDesc  =   document.getElementById("long").value
+              this.$store.dispatch("addProduct", this.product2);
+                
+              }else if( this.update == 0){
+                console.log("updateProduct")
+                this.product2 = {...this.product}
+                this.product2.title     =   document.getElementById("title").value
+                this.$store.dispatch("updateProduct", this.product2, this.product._id);
+
               }else{
                 console.log("Error")
               }
                 
             },
             cleanDataNewProduct(){
-              this.newItem = !this.newItem
-             console.log(document.getElementById("title").value)
-              document.getElementById("id").value = null 
+             
+              document.getElementById("id").value = '' 
               document.getElementById("price").value= 0
               document.getElementById("file").value= ""
               document.getElementById("title").value= ""
