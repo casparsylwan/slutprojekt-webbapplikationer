@@ -6,6 +6,7 @@ import Admin from "../views/Admin.vue"
 import Shop from '../views/Shop.vue'
 import Home from '../views/Home.vue'
 import Cart from '../views/Cart.vue'
+import OrderConfirm from '../views/OrderConfirm.vue'
 
 
 Vue.use(VueRouter)
@@ -48,6 +49,11 @@ Vue.use(VueRouter)
     path: '/cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/orderconfirm',
+    name: 'OrderConfirm',
+    component: OrderConfirm
   }
 ]
 

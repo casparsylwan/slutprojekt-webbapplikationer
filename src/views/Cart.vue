@@ -12,7 +12,7 @@
             <h1>Order Details</h1>
             <div class="shipping">
                 <label>Shipping</label>
-                <select id="select">
+                <select id="select" @change="onChange">
                     <option value="Posten">Posten(49kr)</option>
                     <option value="DB Schenker">Schenker(99kr)</option>
                     <option value="DHL">DHL(119kr)</option>
@@ -20,8 +20,8 @@
             </div>
             <hr>
             <h3>Total Cost</h3>
-            <h2>{{getProductSum}}</h2>
-            <button>Checkout</button>
+            <h2>{{getProductSum + shippingValue}} KR</h2>
+            <router-link to="/orderconfirm"><button>Checkout</button> </router-link>
         </article>
     </section>
 </template>
@@ -32,9 +32,11 @@ export default {
     components: {
         CartItem
     },
-    data: () => ({
-       
-    }),
+    data() {
+        return {
+            shippingValue: 49
+        }
+    },
     
     methods: {
         getProductFromCart(id) {
@@ -43,19 +45,33 @@ export default {
             )[0];
             return obj;
         },
+
+        onChange() {
+            console.log(event.target.value)
+            if(event.target.value === 'Posten'){
+                this.shippingValue = 49
+            }
+            if(event.target.value === 'DB Schenker'){
+                this.shippingValue = 99
+            }
+            if(event.target.value === 'DHL'){
+                this.shippingValue = 119
+            }
+        },
     },
 
     computed: {
     //     ...mapState([
     //        'products'
     //    ]),
+        
 
-       getProducts() {
-           return this.$store.getters.getProducts;
-       },
+        getProducts() {
+            return this.$store.getters.getProducts;
+        },
 
-       getProductSum() {
-           return this.$store.getters.getProductSum
+        getProductSum() {
+            return this.$store.getters.getProductSum
         }
     },
     // mounted(){
@@ -156,6 +172,7 @@ export default {
                 color: white;
                 font-weight: bold;
                 font-size: 1.1rem;
+                cursor: pointer;
             }
 
             h2 {

@@ -7,7 +7,7 @@ Vue.use(Vuex, axios)
 export default new Vuex.Store({
   state: {
     products: [],
-    productsTemp: [{item:{"title":"Wave","price":249,"shortDesc":"Medium","longDesc":"Skate ipsum dolor sit amet, 50-50 Sidewalk Surfer nose bump kickflip bruised heel fakie berm soul skate. Bluntslide transition nollie hard flip bank pressure flip ho-ho. Steps rip grip nosepicker roll-in yeah 540 pump. ","imgFile":"wheel-wave.png","serial":"9919291231232312","_id":"xqHNXRHKL3Mwte0R"}, amount:0, sum:0
+    productsTemp: [{item:{"title":"Wave","price":249,"shortDesc":"Medium","longDesc":"Skate ipsum dolor sit amet, 50-50 Sidewalk Surfer nose bump kickflip bruised heel fakie berm soul skate. Bluntslide transition nollie hard flip bank pressure flip ho-ho. Steps rip grip nosepicker roll-in yeah 540 pump. ","imgFile":"wheel-wave.png","serial":"9919291231232312","_id":"xqHNXRHKL3Mwte0R"},  amount:0
   }],
     productSum: 0,
     token:'',
