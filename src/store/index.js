@@ -109,7 +109,7 @@ export default new Vuex.Store({
     },
 
     removeItemFromCart(state, product) {
-      state.productsTemp.splice(state.productsTemp.indexOf(product), 1);
+      state.cart.splice(state.cart.indexOf(product), 1);
       state.productSum -= product.item.price * product.amount
     }
 

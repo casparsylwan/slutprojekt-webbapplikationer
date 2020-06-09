@@ -93,8 +93,14 @@ export default {
         },
 
         getProductSum() {
-            return this.$store.getters.getProductSum
+            return this.getProducts.reduce((acc,product) => {
+                return acc + Number (product.item.price) * Number (product.quantity)
+            },0);
         }
+
+        // getProductSum() {
+        //     return this.$store.getters.getProductSum
+        // }
     },
     // mounted(){
     //   this.$store.dispatch('loadProducts')
