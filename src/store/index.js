@@ -115,7 +115,9 @@ export default new Vuex.Store({
       commit('registerNewCustomer', response.data)
       if(response.status == 200){
         dispatch("loginCall", customer);
-        
+        return 200
+      }else{
+        return 401
       }
     
       
