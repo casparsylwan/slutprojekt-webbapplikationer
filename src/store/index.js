@@ -131,9 +131,10 @@ export default new Vuex.Store({
         
       }
     },
-    async updateProduct({commit, dispatch}, product, id){
-      console.log(product)
-      const response = await axios.patch(`http://localhost:5000/api/products/:${id}`,{...product},{ headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
+    async updateProduct({commit, dispatch}, product){
+      
+      console.log("ID!====", product._id)
+      const response = await axios.patch(`http://localhost:5000/api/products/${product._id}`,{...product},{ headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
       commit('addProducts', response.data)
       if(response.status == 200){
         
@@ -160,7 +161,7 @@ export default new Vuex.Store({
     
     async deleteProduct({dispatch }, id){
 
-      const response = await axios.delete(`http://localhost:5000/api/products/:${id}`,{ headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
+      const response = await axios.delete(`http://localhost:5000/api/products/${id}`,{ headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
       console.log(response.data)
       if(response.status == 200){
         
