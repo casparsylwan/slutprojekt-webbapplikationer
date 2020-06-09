@@ -111,14 +111,18 @@ export default new Vuex.Store({
   actions: {
     async newCustomer({commit , dispatch}, customer){
 
+      // try{
       const response = await axios.post('http://localhost:5000/api/register', {...customer});
+      
       commit('registerNewCustomer', response.data)
       if(response.status == 200){
         dispatch("loginCall", {...customer} );
         return 200
-      }else{
-        return 401
       }
+    // }catch{
+    //   return "error"
+    // }
+
     
       
     
