@@ -3,55 +3,79 @@
         <article class="cart">
             <h1>Shopping Cart</h1>
             <CartItem class="item"
-            v-for="(product, index) in products"
+            v-for="(product, index) in getProducts"
             :key="index"
-            :title="product.title"
-            :shortDesc="product.shortDesc"
-            :price="product.price"
-            :imgFile="product.imgFile"
-            />
-            
-            <!--   -->
+            :product="product"
+           />
         </article>
         <article class="order">
             <h1>Order Details</h1>
             <div class="shipping">
                 <label>Shipping</label>
-                <select id="select">
+                <select id="select" @change="onChange">
                     <option value="Posten">Posten(49kr)</option>
-                    <option value="DB Schenker">DB Schenker(99kr)</option>
+                    <option value="DB Schenker">Schenker(99kr)</option>
                     <option value="DHL">DHL(119kr)</option>
                 </select>
             </div>
             <hr>
             <h3>Total Cost</h3>
-            <h2>2500.00 KR</h2>
-            <button>Checkout</button>
+            <h2>{{getProductSum + shippingValue}} KR</h2>
+            <router-link to="/orderconfirm"><button>Checkout</button> </router-link>
         </article>
     </section>
 </template>
 <script>
 import CartItem from "../components/CartItem"
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 export default {
     components: {
         CartItem
     },
-    data: () => ({
-
-    }),
+    data() {
+        return {
+            shippingValue: 49
+        }
+    },
     
     methods: {
+        getProductFromCart(id) {
+            let obj = this.$store.state.products.filter(
+                product => product._id == id
+            )[0];
+            return obj;
+        },
 
+        onChange() {
+            console.log(event.target.value)
+            if(event.target.value === 'Posten'){
+                this.shippingValue = 49
+            }
+            if(event.target.value === 'DB Schenker'){
+                this.shippingValue = 99
+            }
+            if(event.target.value === 'DHL'){
+                this.shippingValue = 119
+            }
+        },
     },
     computed: {
-        ...mapState([
-           'products'
-       ])
+    //     ...mapState([
+    //        'products'
+    //    ]),
+        
+
+        getProducts() {
+            return this.$store.getters.getTempProducts;
+        },
+
+        getProductSum() {
+            return this.$store.getters.getProductSum
+        }
     },
-    mounted(){
-      this.$store.dispatch('loadProducts')
-    }
+    // mounted(){
+    //   this.$store.dispatch('loadProducts')
+    // }
 }
 </script>
 
@@ -147,6 +171,7 @@ export default {
                 color: white;
                 font-weight: bold;
                 font-size: 1.1rem;
+                cursor: pointer;
             }
 
             h2 {

@@ -15,9 +15,11 @@
             <router-link to="">My Account</router-link>
         </nav> 
         <nav class="bottom-nav">
-            <div class="sinus">
-                <h1>SINUS.</h1>
-            </div>
+            <router-link to="/">
+                <div class="sinus">
+                    <h1>SINUS.</h1>
+                </div>
+            </router-link>
             <div class="links">
                 <router-link to="/shop">Shop</router-link>
                 <router-link to="/about">Our Values</router-link>
@@ -87,12 +89,15 @@ export default {
             display: flex;
             justify-content: space-between;
             padding: 0 2rem;
-            
-            .sinus {
-                h1{
-                    font-size: 6rem;
-                    color: black;
-                    margin: 0;
+
+            a{
+                text-decoration: none;
+                .sinus {
+                    h1{
+                        font-size: 6rem;
+                        color: black;
+                        margin: 0;
+                    }
                 }
             }
             .links{

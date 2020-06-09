@@ -7,6 +7,9 @@ Vue.use(Vuex, axios)
 export default new Vuex.Store({
   state: {
     products: [],
+    productsTemp: [{item:{"title":"Wave","price":249,"shortDesc":"Medium","longDesc":"Skate ipsum dolor sit amet, 50-50 Sidewalk Surfer nose bump kickflip bruised heel fakie berm soul skate. Bluntslide transition nollie hard flip bank pressure flip ho-ho. Steps rip grip nosepicker roll-in yeah 540 pump. ","imgFile":"wheel-wave.png","serial":"9919291231232312","_id":"xqHNXRHKL3Mwte0R"},  amount:0
+  }],
+    productSum: 0,
     token:'',
     customer:{
        name: '',
@@ -36,11 +39,9 @@ export default new Vuex.Store({
   mutations: {
 
     setProducts(state, payload){
-      // console.log(payload)
       state.products = []
       for(let i=0; i<payload.length; i++)
       {
-      //  console.log(payload[i].title)
         payload[i].price = Number(payload[i].price)
         state.products.push(payload[i])
       }
@@ -67,10 +68,7 @@ export default new Vuex.Store({
       state.customer.email = customer.email;
       state.customer.password = customer.password;
       state.customer.repeatPassword = customer.repeatPassword;
-      // console.log(customer);
-      // console.log(customer.message);
-      // console.log(1);
-    //  console.log(state)
+     
       
       
     },
@@ -93,7 +91,18 @@ export default new Vuex.Store({
     addProducts(state, product){
       console.log(state)
       console.log(product)
-    }
+    },
+
+    incrementAmountAndSum(state, payload) {
+      
+      state.productSum += payload.item.price;
+      payload.amount++;
+    },
+
+    decrementAmountAndSum(state, payload) {
+      state.productSum -= payload.item.price;
+      payload.amount--;
+    },
   },
   actions: {
     async newCustomer({commit , dispatch}, customer){
@@ -178,13 +187,15 @@ export default new Vuex.Store({
     getProducts(state){
       return state.products;
     },
-    //,
-    // getOrder(state){
-      
-      
-    // }
-  },
-    
+    getTempProducts(state) {
+      return state.productsTemp;
+    },
+
+    getProductSum(state) {
+      return state.productSum;
+    },
+  }, 
+
   modules: {
   }
 })

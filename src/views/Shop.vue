@@ -2,10 +2,8 @@
 <section class="shop">
 
   <modal v-if="modalVisible" @close="modalVisible = false" :data="modalData"/>      
-  
   <article class="product-container" v-for="(product, index) in products" :key="index">
-      <!-- <product  v-on:mouseover.native="openModal(product)" :product="product"/> -->
-      <product  @click.native="openModal(product)" :product="product"/>
+    <product  @click.native="openModal(product)" :product="product"/>
   </article>
 
 </section>
