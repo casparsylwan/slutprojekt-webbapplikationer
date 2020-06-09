@@ -7,7 +7,7 @@ Vue.use(Vuex, axios)
 export default new Vuex.Store({
   state: {
     products: [],
-    productsTemp: [{item:{"title":"Wave","price":249,"shortDesc":"Medium","longDesc":"Skate ipsum dolor sit amet, 50-50 Sidewalk Surfer nose bump kickflip bruised heel fakie berm soul skate. Bluntslide transition nollie hard flip bank pressure flip ho-ho. Steps rip grip nosepicker roll-in yeah 540 pump. ","imgFile":"wheel-wave.png","serial":"9919291231232312","_id":"xqHNXRHKL3Mwte0R"},  amount:0
+    productsTemp: [{item:{"title":"Wave","price":249,"shortDesc":"Medium","longDesc":"Skate ipsum dolor sit amet, 50-50 Sidewalk Surfer nose bump kickflip bruised heel fakie berm soul skate. Bluntslide transition nollie hard flip bank pressure flip ho-ho. Steps rip grip nosepicker roll-in yeah 540 pump. ","imgFile":"wheel-wave.png","serial":"9919291231232312","_id":"xqHNXRHKL3Mwte0R"},  quantity:0
   }],
     productSum: 0,
     token:'',
@@ -37,6 +37,10 @@ export default new Vuex.Store({
     cart: [],
   },
   mutations: {
+
+    // addToCart(state,payload){
+
+    // },
 
     setProducts(state, payload){
       state.products = []
@@ -96,12 +100,12 @@ export default new Vuex.Store({
     incrementAmountAndSum(state, payload) {
       
       state.productSum += payload.item.price;
-      payload.amount++;
+      payload.quantity++;
     },
 
     decrementAmountAndSum(state, payload) {
       state.productSum -= payload.item.price;
-      payload.amount--;
+      payload.quantity--;
     },
   },
   actions: {
@@ -156,16 +160,16 @@ export default new Vuex.Store({
       console.log("Products loaded!")
       const response = await axios.get("http://localhost:5000/api/products/");
       commit('setProducts', response.data)
-    await axios
-       .get("http://localhost:5000/api/products/")
-       .then(respone => {
-         let products = respone.data
-         console.log(products)
-         commit('setProducts', products)
-       })
-       .catch( error => {
-         console.log(error)
-       })
+    // await axios
+    //    .get("http://localhost:5000/api/products/")
+    //    .then(respone => {
+    //      let products = respone.data
+    //      console.log(products)
+    //      commit('setProducts', products)
+    //    })
+    //    .catch( error => {
+    //      console.log(error)
+    //    })
     },
     
     async deleteProduct({dispatch }, id){
@@ -195,7 +199,21 @@ export default new Vuex.Store({
     getProductSum(state) {
       return state.productSum;
     },
+    getCart(state){
+      return state.cart
+    },
+
+    getCartItems(state){
+      return state.cart.map(item => 
+        ({
+          item: state.products.find(product => item.id == product._id),
+          quantity: item.quantity
+        })
+      )
+    },
   }, 
+
+  
 
   modules: {
   }

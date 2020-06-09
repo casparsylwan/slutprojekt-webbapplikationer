@@ -11,10 +11,12 @@
               <h1 class="title">{{data.title}}</h1>
               <span>___________________________________</span>
               <p class="long-desc">{{data.longDesc}}</p>
-              <input id="quantity" class="quantity" type="number" value="1" >
+              <input id="quantity" class="quantity" type="number" min="1" v-model="tempQuantity">
               <label for="quantity"> Quantity</label>
               <br>
             <div class="btn" @click=addToCart>Add to Cart</div >
+
+            
             
           </div>
       </div>
@@ -24,6 +26,12 @@
 
 export default {
     data: () => ({
+      tempQuantity: 1,
+      item: {
+        id: "",
+        quantity: 0,
+      },
+      
 
     }),
     props:{
@@ -32,10 +40,33 @@ export default {
     
     methods: {
         addToCart(){
-            this.$emit('close')
+          if (this.tempQuantity <= 0) {
+            console.log("product not added, quantity to low")
+          }else{
+
+            this.item.id = this.data._id
+            let index = this.cart.findIndex(currentOrder => currentOrder.id == this.item.id)
+
+            if (index == -1) {
+              this.item.quantity = Number(this.tempQuantity)
+              console.log(this.item.quantity)
+              this.cart.push(this.item) 
+            } else{
+            this.cart[index].quantity += Number(this.tempQuantity);  
+             
+              console.log(this.item)
+            }
+            
+          }
+          
         }
         
        
+    },
+    computed:{
+      cart(){
+        return this.$store.getters.getCart
+      }
     }
 }
 </script>
