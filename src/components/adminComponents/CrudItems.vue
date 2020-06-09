@@ -5,13 +5,12 @@
       <div class="radio">
         <div class="radio-box">
           <input type="radio"  
-            v-model="update" value="0"
-          >
+            v-model="updateProduct" :value="true" @click="copyToUpdateProduct()" >
 
         <!--
-          :checked="!product._id"
-          :checked="product._id"
+          :checked="!product2._id"
           disabled="true"
+          :checked="product2._id"
           -->
 
 
@@ -19,36 +18,36 @@
         </div>
         <div class="radio-box" >
           <input id="id" type="radio"  
-            v-model="update" value="1" @click="cleanDataNewProduct(update)"
+            v-model="updateProduct" :value="false" @click="cleanDataNewProduct()"            
             >
           <label>Ny produkt</label>
         </div> 
-        {{ update }} 
+        {{ updateProduct }} 
       </div>
       <div class="element-input">
         <label >Produkt title</label>
-        <input id="title" type="text" onfocus="this.placeholder=''" placeholder="Produkt title" :value="product.title">
+        <input id="title" type="text" onfocus="this.placeholder=''" placeholder="Produkt title" v-model="product2.title">
         
       </div>
       <div class="element-input">
         <label >pris</label>
-        <input id="price" type="number" min="1" onfocus="this.value=1" :value="product.price">
+        <input id="price" type="number" min="1" onfocus="this.value=1" v-model="product2.price">
         
       </div>
       <div class="element-input">
         <label >Bild länk</label>
-        <input id="file" type="text" onfocus="this.value=''" placeholder="Länk till fotot" :value="product.imgFile">
+        <input id="file" type="text" onfocus="this.value=''" placeholder="Länk till fotot" v-model="product2.imgFile">
         
       </div>
       <div class="element-input">
         <label >Kort beskrivning</label>
-        <input id="short" type="text" onfocus="this.value=''" placeholder="Kort produkt beskrivning" :value="product.shortDesc">
+        <input id="short" type="text" onfocus="this.value=''" placeholder="Kort produkt beskrivning" v-model="product2.shortDesc">
         
       </div>
       <div class="element-input">
         <label> Lång beskrivning </label>
-        <textarea id="long" rows="10" :value="product.longDesc"></textarea>
-        {{ product.longDesc }}
+        <textarea id="long" rows="10" v-model="product2.longDesc"></textarea>
+        {{ product2.longDesc }}
       </div>
       <div class="element-input btn-box">
                 <div @click="registerProduct()" class="btn">
@@ -72,7 +71,7 @@ export default {
   props:['product'],
   data(){
       return {
-        update:1,
+        updateProduct:false,
         
         index:1,
          product2 : {}    
@@ -83,38 +82,47 @@ export default {
         methods:{
 
             registerProduct(){
-              console.log(this.update)
-              if( this.update == 1){              
+              console.log(this.updateProduct)
+              if( !this.updateProduct){              
                 console.log("new")
-              this.product2.price     =   document.getElementById("price").value
-              this.product2.imgFile   =   document.getElementById("file").value
-              this.product2.title     =   document.getElementById("title").value
-              this.product2.shortDesc =   document.getElementById("short").value
-              this.product2.longDesc  =   document.getElementById("long").value
+                //AddProduct product2
               this.$store.dispatch("addProduct", this.product2);
                 
-              }else if( this.update == 0){
+              }else if( this.updateProduct){
                 console.log("updateProduct")
-                this.product2 = {...this.product}
-                this.product2.title     =   document.getElementById("title").value
-                this.$store.dispatch("updateProduct", this.product2, this.product._id);
+                //UpdateProduct               
+                this.$store.dispatch("updateProduct", this.product2);
 
               }else{
                 console.log("Error")
-              }
-                
+              }                
             },
             cleanDataNewProduct(){
              
-              document.getElementById("id").value = '' 
-              document.getElementById("price").value= 0
-              document.getElementById("file").value= ""
-              document.getElementById("title").value= ""
-              document.getElementById("short").value= ""
-              document.getElementById("long").value= ""
-
+              this.product2._id = ''
+              this.product2.title = '' 
+              this.product2.price = 0
+              this.product2.shortDesc = ''
+              this.product2.longDesc = ''
+              this.product2.imgFile = ''
+              
+               /*Product interface 
+            product : {
+                        title: '',
+                        price: 0,
+                        shortDesc: '',
+                        longDesc: '',
+                        imgFile: ''
+                    }    
+                    */
+            },
+             copyToUpdateProduct(){
+              this.product2 = {...this.product}
             }
 
+            },
+            beforeMount(){
+              this.product2 = {...this.product}
             } 
   }
 
