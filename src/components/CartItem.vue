@@ -16,7 +16,7 @@
             <p>{{product.item.price}} KR</p>
         </div> 
         <div class="remove">
-            <img src="../assets/remove.png" alt="">
+            <img src="../assets/remove.png" alt="" @click="removeProduct">
         </div> 
         <hr>  
     </div>
@@ -36,8 +36,18 @@ export default {
         },
 
         decrementAmount() {
-            if(this.product.amount > 0){
+            if(this.product.amount > 1){
                 this.$store.commit("decrementAmountAndSum", this.product)
+            }else {
+                this.removeProduct();
+            }
+        },
+
+        removeProduct() {
+            this.$store.commit("removeItemFromCart", this.product)
+            
+            if(this.$store.getters.getProducts <= 0) {
+                this.$router.push('/shop');
             }
         }
     },

@@ -53,6 +53,10 @@ export default new Vuex.Store({
       payload.amount--;
     },
 
+    removeItemFromCart(state, product) {
+      state.productsTemp.splice(state.productsTemp.indexOf(product), 1);
+      state.productSum -= product.item.price * product.amount
+    }
 
   
   },
