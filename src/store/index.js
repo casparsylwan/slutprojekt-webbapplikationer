@@ -98,14 +98,17 @@ export default new Vuex.Store({
     },
 
     incrementAmountAndSum(state, payload) {
-      
+
       state.productSum += payload.item.price;
-      payload.quantity++;
+      let item = state.cart.find( item => item.id == payload.item._id)
+      item.quantity += 1;
     },
 
     decrementAmountAndSum(state, payload) {
       state.productSum -= payload.item.price;
-      payload.quantity--;
+      let item = state.cart.find( item => item.id == payload.item._id)
+      item.quantity -= 1;
+      
     },
 
     removeItemFromCart(state, product) {
