@@ -18,14 +18,7 @@ export default {
   },
 
   methods: {
-    // closePopup() {
-    //   console.log("closed popup");
-    //   document.getElementById("popup").style.display = "none";
-    // },
-    // openPopup() {
-    //   console.log("open popup");
-    //   document.getElementById("popup").style.display = "block";
-    // }
+  
   }
 };
 </script>
