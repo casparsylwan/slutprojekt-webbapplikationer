@@ -7,10 +7,10 @@
             <h3>{{product.item.title}}</h3>
             <p class="desc">{{product.item.shortDesc}}</p>
         </div>
-        <div class="amount">
-            <img @click="decrementAmount" src="../assets/minus-solid.svg" alt="">
-            <input type="text" :value="product.amount">
-            <img @click="incrementAmount" src="../assets/plus-solid.svg" alt="">
+        <div class="quantity">
+            <img @click="decrementQuantity" src="../assets/minus-solid.svg" alt="">
+            <input type="text" :value="product.quantity">
+            <img @click="incrementQuantity" src="../assets/plus-solid.svg" alt="">
         </div>
         <div class="price">
             <p>{{product.item.price}} KR</p>
@@ -31,12 +31,12 @@ export default {
     
     methods: {
         
-        incrementAmount() {
+        incrementQuantity() {
             this.$store.commit("incrementAmountAndSum", this.product);
         },
 
-        decrementAmount() {
-            if(this.product.amount > 1){
+        decrementQuantity() {
+            if(this.product.quantity > 0){
                 this.$store.commit("decrementAmountAndSum", this.product)
             }else {
                 this.removeProduct();
@@ -80,7 +80,7 @@ export default {
             }
         }
 
-        .amount {
+        .quantity {
 
             img {
                 width: 12px;

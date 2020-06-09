@@ -21,7 +21,7 @@
             <hr>
             <h3>Total Cost</h3>
             <h2>{{getProductSum + shippingValue}} KR</h2>
-            <router-link to="/orderconfirm"><button>Checkout</button> </router-link>
+            <router-link to="/orderconfirm"><button @click="getProductFromCart">Checkout</button> </router-link>
         </article>
     </section>
 </template>
@@ -34,16 +34,39 @@ export default {
     },
     data() {
         return {
-            shippingValue: 49
+            shippingValue: 49,
+            CartItem: []
         }
     },
     
     methods: {
-        getProductFromCart(id) {
-            let obj = this.$store.state.products.filter(
-                product => product._id == id
-            )[0];
-            return obj;
+        getProductFromCart() {
+        //    let cart = this.$store.getters.getCart
+           
+
+        //     let arr = this.$store.state.products.filter(
+        //         product => cart.indexOf(product._id). != -1 
+        //     );
+        //     return arr;
+        // let cart = this.$store.getters.getCart
+        // let products = this.$store.getters.getProducts
+        // let cartproducts = []
+        // for (let i = 0; i < cart.length; i++){
+        //     for (let j = 0; j <products.length; j++){
+        //         if (cart[i].id == products[j]._id) {
+        //             products[j].quantity = cart[i].quantity
+        //             cartproducts.push(products[j]) 
+
+        //         }
+                
+
+        //     }
+        // }
+        // console.log(cartproducts)
+        // return cartproducts
+
+        console.log(this.getProducts)
+      
         },
 
         onChange() {
@@ -59,7 +82,6 @@ export default {
             }
         },
     },
-
     computed: {
     //     ...mapState([
     //        'products'
@@ -67,7 +89,7 @@ export default {
         
 
         getProducts() {
-            return this.$store.getters.getProducts;
+            return this.$store.getters.getCartItems;
         },
 
         getProductSum() {
@@ -76,6 +98,13 @@ export default {
     },
     // mounted(){
     //   this.$store.dispatch('loadProducts')
+    // }
+
+    // beforeMount(){
+        
+    //     this.CartItem = this.getProductFromCart
+        
+       
     // }
 }
 </script>
@@ -134,9 +163,9 @@ export default {
                     background-image: url(../assets/arrow.png);
                     background-repeat: no-repeat;
                     background-position: 98% 95%;
-                    option {
+                    // option {
                         
-                    }
+                    // }
                 }
 
                 
