@@ -13,6 +13,19 @@ import OrderConfirm from '../views/OrderConfirm.vue';
 
 Vue.use(VueRouter)
 
+function guardLoginRoute(to, from, next){
+
+  // let isAuthenticated= false;
+ 
+   if(!localStorage.getItem('theCustomer')){
+     
+    next();
+     
+   }else{
+     next('/account')
+   }
+ }
+
 function guardAdminRoute(to, from, next){
 
   // let isAuthenticated= false;
@@ -75,6 +88,7 @@ function guardMyroute(to, from, next){
   {
     path: '/login',
     name: 'Login',
+    beforeEnter : guardLoginRoute,
     component: Login
   },
   {

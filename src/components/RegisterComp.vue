@@ -92,16 +92,19 @@ export default {
     },
     register(){
         this.customer.adress = this.adress;
+        let self = this;
         let prom = this.$store.dispatch("newCustomer", this.customer);
-        prom.then( res =>{
-            console.log(res)
-            if(this.getClient.email.length>0 && this.getClient.role === 'customer'){
-                this.$router.push({ path: '/account'})
-                }
-                else{
-                    this.somethingWentWrong= " Något blev fel, försök igen med en annan e-post!"
-                }
+        prom.then(() =>{
+            
+                self.$router.replace("/shop")
+           
         })
+                
+             
+               
+        
+        
+     
        
     },
     password(){
