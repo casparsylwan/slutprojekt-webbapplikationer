@@ -112,12 +112,6 @@ export default new Vuex.Store({
       
     },
 
-    removeItemFromCart(state, product) {
-      state.cart.splice(state.cart.indexOf(product), 1);
-      state.productSum -= product.item.price * product.amount
-    }
-
-  
   },
   actions: {
     async newCustomer({commit , dispatch}, customer){
@@ -192,6 +186,16 @@ export default new Vuex.Store({
         dispatch("loadProducts");
         
       }
+    },
+
+    async addOrder( order) {
+      const response = await axios.post(`http://localhost:5000/api/orders/`, {...order}, { headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}})
+      console.log(response)
+    },
+
+    async addOrderToCustomer() {
+    const response = await axios.get(`http://localhost:5000/api/orders/`, { headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}})
+    console.log(response)
     }
 
   },
