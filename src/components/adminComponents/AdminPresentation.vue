@@ -22,19 +22,27 @@
             <article class="adress">
 
             </article>
-            <article class="orders">
-                <div v-for="(order, index) in orders" :key="index">
-                  <h1>Order Id</h1>
-                  <p>{{order._id}}</p> 
-                  <h1>Order Date</h1>
-                  <p>{{order.timeStamp}}</p>
-                  <br> 
-                </div>
-            </article>
+            
 
         </section>
+        
 
         </div>
+        <article class="orders">
+                <div class="order" v-for="(order, index) in orders" :key="index">
+
+                    <div class="orderTime">
+                       <p>Beställningstid:</p> 
+                       <p>{{new Date(order.timeStamp).toLocaleString() }}</p>
+                    </div>
+                    
+                    <div class="orderId">
+                       <p>Order summa:</p> 
+                       <p>{{ order.orderValue }} kr</p>
+                    </div>
+
+                </div>
+            </article>
     </div> 
 </template>
 <script>
@@ -65,7 +73,8 @@ export default {
         
 
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: flex-start;
 
 
     //    background-color: #999;
@@ -188,9 +197,21 @@ export default {
         }
     }
 
-    // .table{
+     .order{
+        height: 4rem;
+        background: #D7E5EE;
+        display: flex;
+        justify-content: space-evenly;
+        color:#971;
 
-    // }
+        .orderTime, .orderId{
+            display: flex;
+            flex-direction: column;
+            font-weight: bold;
+            font-size:1.5rem;
+
+        }
+    }
 
     @keyframes frame {
         0%{

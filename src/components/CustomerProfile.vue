@@ -23,8 +23,22 @@
 
             </article>
             <article class="orders">
-                <div v-for="(order, index) in orders" :key="index">
-                    {{order}}
+                <div class="order-box">
+                     {{ orders }}
+                </div>
+                <div class="order" v-for="(order, index) in orders" :key="index">
+                    <div class="orderTime">
+                       <p>Beställningstid:</p> 
+                       <p>{{new Date(order.timeStamp).toLocaleString() }}</p>
+                    </div>
+                    <div class="orderId">
+                       <p>Order id:</p> 
+                       <p>{{ order._id }}</p>
+                    </div>
+                    <div class="orderId">
+                       <p>Order id:</p> 
+                       <p>{{ order.orderValue }} kr</p>
+                    </div>
                 </div>
             </article>
 
@@ -63,7 +77,7 @@ export default {
         justify-content: center;
 
 
-    //    background-color: #999;
+        background-color: #999;
         .photo{
                 position:relative;
 
@@ -183,9 +197,21 @@ export default {
         }
     }
 
-    // .table{
+    .order{
+        height: 4rem;
+        background: #D7E5EE;
+        display: flex;
+        justify-content: space-evenly;
+        color:#971;
 
-    // }
+        .orderTime, .orderId{
+            display: flex;
+            flex-direction: column;
+            font-weight: bold;
+            font-size:1.5rem;
+
+        }
+    }
 
     @keyframes frame {
         0%{
