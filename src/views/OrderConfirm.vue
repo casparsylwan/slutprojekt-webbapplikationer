@@ -91,7 +91,8 @@ export default {
         a {
             display: flex;
             justify-content: space-evenly;
-            background: rgb(241, 239, 239);
+            background: white;
+            border: black solid 2px;
             width: 150px;
             padding: 1rem 1rem;
             border-radius: 10px;

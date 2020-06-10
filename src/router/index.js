@@ -10,6 +10,7 @@ import Admin from "../views/Admin.vue";
 import Anonymous from "../views/Anonymous.vue";
 import Account from "../views/Account.vue";
 import OrderConfirm from '../views/OrderConfirm.vue';
+import Contact from '../views/Contact.vue';
 
 Vue.use(VueRouter)
 
@@ -124,6 +125,11 @@ function guardMyroute(to, from, next){
     path: '/orderconfirm',
     name: 'OrderConfirm',
     component: OrderConfirm
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: Contact
   }
 ]
 
