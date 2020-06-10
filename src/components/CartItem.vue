@@ -44,13 +44,10 @@ export default {
         },
 
         removeProduct() {
-            this.$store.commit("removeItemFromCart", this.product)
-            
-            if(this.$store.getters.getProducts <= 0) {
-                this.$router.push('/shop');
-            }
+            this.$emit('removeItem')
         }
     },
+
 
 }
 </script>

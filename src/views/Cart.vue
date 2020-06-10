@@ -6,6 +6,8 @@
             v-for="(product, index) in getProducts"
             :key="index"
             :product="product"
+            @removeItem="removeItem(index)"
+            
            />
         </article>
         <article class="order">
@@ -21,13 +23,12 @@
             <hr>
             <h3>Total Cost</h3>
             <h2>{{getProductSum + shippingValue}} KR</h2>
-            <router-link to="/orderconfirm"><button @click="getProductFromCart">Checkout</button> </router-link>
+            <router-link to="/orderconfirm"><button>Checkout</button> </router-link>
         </article>
     </section>
 </template>
 <script>
 import CartItem from "../components/CartItem"
-// import { mapState } from "vuex";
 export default {
     components: {
         CartItem
@@ -35,39 +36,17 @@ export default {
     data() {
         return {
             shippingValue: 49,
-            CartItem: []
         }
     },
     
     methods: {
-        getProductFromCart() {
-        //    let cart = this.$store.getters.getCart
-           
-
-        //     let arr = this.$store.state.products.filter(
-        //         product => cart.indexOf(product._id). != -1 
-        //     );
-        //     return arr;
-        // let cart = this.$store.getters.getCart
-        // let products = this.$store.getters.getProducts
-        // let cartproducts = []
-        // for (let i = 0; i < cart.length; i++){
-        //     for (let j = 0; j <products.length; j++){
-        //         if (cart[i].id == products[j]._id) {
-        //             products[j].quantity = cart[i].quantity
-        //             cartproducts.push(products[j]) 
-
-        //         }
-                
-
-        //     }
-        // }
-        // console.log(cartproducts)
-        // return cartproducts
-
-        console.log(this.getProducts)
-      
+        removeItem(index) {
+            this.$store.state.cart.splice(index, 1);
+            if(this.$store.getters.getCartItems <= 0) {
+                this.$router.push('/shop');
+            }
         },
+
 
         onChange() {
             console.log(event.target.value)
@@ -83,10 +62,6 @@ export default {
         },
     },
     computed: {
-    //     ...mapState([
-    //        'products'
-    //    ]),
-        
 
         getProducts() {
             return this.$store.getters.getCartItems;
@@ -96,22 +71,12 @@ export default {
             return this.getProducts.reduce((acc,product) => {
                 return acc + Number (product.item.price) * Number (product.quantity)
             },0);
-        }
+        },
 
-        // getProductSum() {
-        //     return this.$store.getters.getProductSum
-        // }
+        
+
     },
-    // mounted(){
-    //   this.$store.dispatch('loadProducts')
-    // }
-
-    // beforeMount(){
-        
-    //     this.CartItem = this.getProductFromCart
-        
-       
-    // }
+    
 }
 </script>
 

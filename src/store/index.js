@@ -97,23 +97,16 @@ export default new Vuex.Store({
       console.log(product)
     },
 
-    incrementAmountAndSum(state, payload) {
-      
-      state.productSum += payload.item.price;
-      payload.quantity++;
+    incrementAmountAndSum(state, product) {
+      // state.productSum += product.item.price;
+      product.quantity++;
     },
 
-    decrementAmountAndSum(state, payload) {
-      state.productSum -= payload.item.price;
-      payload.quantity--;
+    decrementAmountAndSum(state, product) {
+      state.productSum -= product.item.price;
+      product.quantity--;
     },
 
-    removeItemFromCart(state, product) {
-      state.cart.splice(state.cart.indexOf(product), 1);
-      state.productSum -= product.item.price * product.amount
-    }
-
-  
   },
   actions: {
     async newCustomer({commit , dispatch}, customer){
