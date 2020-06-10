@@ -54,10 +54,28 @@ function guardMyroute(to, from, next){
   }
 }
 
+function guardHomePage(to, from, next){
+
+  // let isAuthenticated= false;
+ 
+   if(localStorage.getItem('theCustomer')){
+     let clientJson = localStorage.getItem('theCustomer');
+     let client = JSON.parse(clientJson);
+     if(client.role === 'customer'){
+       next('/account');
+     }else{
+       next();
+     }
+    }else{
+      next();
+     }
+ }
+
   const routes = [
   {
     path: '/',
     name: 'Anonymous',
+    beforeEnter : guardHomePage,
     component: Anonymous
   },
   {

@@ -1,7 +1,5 @@
 <template>
-  <div class="account">
-    <section>
-      <article class="background">
+      <section class="account">
         <div class="featured">
           <h2>Featured For You</h2>
         </div>
@@ -9,27 +7,24 @@
           <img src="../assets/hoodie-ash.png" alt="">
           <img src="../assets/hoodie-fire.png" alt="">
         </div>
-      </article>
-      <Footer />
-    </section>
-  </div>
+      </section>
+     
 </template>
 
 <script>
-import Footer from "../components/Footer"
-
 export default {
   name: 'Account',
-  components: {
-    Footer
-  }
+
+  computed: {
+  
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-  .background {
+  .account {
     background-image: url("../assets/background.jpg");
-    height: 900px;
+    flex-grow: 1;
     background-size: cover;
     background-repeat: no-repeat;
     display: grid;

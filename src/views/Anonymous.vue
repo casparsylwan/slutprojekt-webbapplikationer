@@ -2,7 +2,7 @@
         <section class="anonymous">
         <div class="register">
           <h2>Join Our Family</h2>
-          <button>Register Here</button>
+          <router-link to="/login"><button>Register Here</button></router-link> 
         </div>
       </section>
   

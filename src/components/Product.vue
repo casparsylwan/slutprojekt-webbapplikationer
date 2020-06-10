@@ -27,11 +27,16 @@ export default {
 .product {
     box-sizing: border-box;
     padding: 1rem;
+    padding-bottom: 0;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
     width: 20rem;
     cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 2rem;
+    border: 0px solid rgba($color: white, $alpha: 0.5);
+
 
   .product-info {
     width: 100%;
@@ -40,9 +45,8 @@ export default {
     flex-direction: row;
   }
   &:hover{
-      border-radius: 1rem;
-      border-color: grey;
-      border-style: solid;
+    border: 2px solid rgba($color: white, $alpha: 0.5);
+    background-color: rgba($color: white, $alpha: 0.3);
   }
 
   .pic-container {
@@ -57,5 +61,16 @@ export default {
       vertical-align: bottom;
     }
   }
+
+  h1{
+    font-size: 2rem;
+    font-variant: small-caps;
+  }
+  
+  h2{
+    font-size: 1.5rem;
+  }
+  
+  
 }
 </style>

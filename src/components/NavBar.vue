@@ -11,8 +11,8 @@
         </nav>
         <nav class="top-nav" v-if="getClient.role=='admin'">
             <a @click="logout()" href="/login">Log Out</a>
-            <router-link to="">Admin Settings</router-link>
-            <router-link to="">My Account</router-link>
+            <router-link to="/admin">Admin Settings</router-link>
+            
         </nav> 
         <nav class="bottom-nav">
             <router-link to="/">
