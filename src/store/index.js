@@ -98,31 +98,35 @@ export default new Vuex.Store({
     },
 
     incrementAmountAndSum(state, payload) {
-      
+
       state.productSum += payload.item.price;
-      payload.quantity++;
+      let item = state.cart.find( item => item.id == payload.item._id)
+      item.quantity += 1;
     },
 
     decrementAmountAndSum(state, payload) {
       state.productSum -= payload.item.price;
-      payload.quantity--;
+      let item = state.cart.find( item => item.id == payload.item._id)
+      item.quantity -= 1;
+      
     },
+
+    removeItemFromCart(state, product) {
+      state.cart.splice(state.cart.indexOf(product), 1);
+      state.productSum -= product.item.price * product.amount
+    }
+
+  
   },
   actions: {
     async newCustomer({commit , dispatch}, customer){
 
-      // try{
       const response = await axios.post('http://localhost:5000/api/register', {...customer});
-      
       commit('registerNewCustomer', response.data)
       if(response.status == 200){
-        dispatch("loginCall", {...customer} );
-        return 200
+        dispatch("loginCall", customer);
+        
       }
-    // }catch{
-    //   return "error"
-    // }
-
     
       
     

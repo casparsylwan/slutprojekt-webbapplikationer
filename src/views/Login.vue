@@ -64,7 +64,13 @@ export default {
     getClient(){
       return this.$store.getters.getClient
     }
-  }
+  },
+//   beforeMount(){
+
+//       navToRegiter(){
+//           x.id == this.$route.params.id
+//       }
+//     }
   }
 
 </script>
