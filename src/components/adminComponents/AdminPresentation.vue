@@ -23,7 +23,13 @@
 
             </article>
             <article class="orders">
-
+                <div v-for="(order, index) in orders" :key="index">
+                  <h1>Order Id</h1>
+                  <p>{{order._id}}</p> 
+                  <h1>Order Date</h1>
+                  <p>{{order.timeStamp}}</p>
+                  <br> 
+                </div>
             </article>
 
         </section>
@@ -32,18 +38,26 @@
     </div> 
 </template>
 <script>
+import { mapState } from "vuex"
+
 export default {
 
     method:{
 
     },
    computed:{
+       ...mapState([
+           'orders'
+       ]),
 
     getClient(){
       return this.$store.getters.getClient
     }
 
-    }
+    },
+     mounted(){
+      this.$store.dispatch('loadOrders')
+  },
 }
 </script>
 <style lang="scss" scoped>

@@ -36,6 +36,7 @@ export default new Vuex.Store({
    },   
     cart: [],
     items: [],
+    orders: [],
   },
   mutations: {
 
@@ -111,6 +112,16 @@ export default new Vuex.Store({
       item.quantity -= 1;
       
     },
+
+    setOrders(state,payload){
+      state.orders = []
+      payload.forEach(order => {
+        state.orders.push(order)
+      });
+    },
+    addOrder(state, payload){
+      state.orders.push(payload)
+    }
 
   },
   actions: {
@@ -188,15 +199,25 @@ export default new Vuex.Store({
       }
     },
 
-    async addOrder( order) {
-      const response = await axios.post(`http://localhost:5000/api/orders/`, {...order}, { headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}})
+    async addOrder({commit}, items) {
+      
+      const response = await axios.post(`http://localhost:5000/api/orders/`, {...items}, { headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}})
       console.log(response)
+      console.log("Order in Store:" & items)
+      commit('addOrder', response.data)
     },
 
     async addOrderToCustomer() {
     const response = await axios.get(`http://localhost:5000/api/orders/`, { headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}})
     console.log(response)
-    }
+    },
+
+     async loadOrders({commit}){
+      const response = await axios.get("http://localhost:5000/api/orders/", { headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
+      commit('setOrders', response.data)
+    },
+    
+ 
 
   },
   getters:{
@@ -234,6 +255,10 @@ export default new Vuex.Store({
         }
       });
       return orderArr
+    },
+
+    getOrders(state){
+      return state.orders
     }
   }, 
 

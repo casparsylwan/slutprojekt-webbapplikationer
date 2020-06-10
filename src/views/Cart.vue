@@ -36,6 +36,12 @@ export default {
     data() {
         return {
             shippingValue: 49,
+            order: {
+                // timeStamp: Date.now(), 
+                // status: 'inProcess',
+                items: [],
+                // orderValue: 0
+            },
         }
     },
     
@@ -62,7 +68,11 @@ export default {
         },
 
         sendOrder() {
-            this.$store.dispatch('addOrder', this.getProducts)
+            this.order.items = this.getOrder
+            // this.order.timeStamp = Date.now()
+            // this.order.orderValue = this.getProductSum
+            this.$store.dispatch('addOrder', this.order)
+            console.log(this.order)
         },
 
         // sendOrder() {
@@ -73,6 +83,9 @@ export default {
 
         getProducts() {
             return this.$store.getters.getCartItems;
+        },
+        getOrder(){
+            return this.$store.getters.getOrderItems;
         },
 
         getProductSum() {
