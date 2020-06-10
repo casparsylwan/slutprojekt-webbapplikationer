@@ -185,6 +185,16 @@ export default new Vuex.Store({
         dispatch("loadProducts");
         
       }
+    },
+
+    async addOrder( order) {
+      const response = await axios.post(`http://localhost:5000/api/orders/`, {...order}, { headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}})
+      console.log(response)
+    },
+
+    async addOrderToCustomer() {
+    const response = await axios.get(`http://localhost:5000/api/orders/`, { headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}})
+    console.log(response)
     }
 
   },

@@ -23,7 +23,7 @@
             <hr>
             <h3>Total Cost</h3>
             <h2>{{getProductSum + shippingValue}} KR</h2>
-            <router-link to="/orderconfirm"><button>Checkout</button> </router-link>
+            <router-link to="/orderconfirm"><button @click="sendOrder">Checkout</button> </router-link>
         </article>
     </section>
 </template>
@@ -60,6 +60,14 @@ export default {
                 this.shippingValue = 119
             }
         },
+
+        sendOrder() {
+            this.$store.dispatch('addOrder', this.getProducts)
+        },
+
+        // sendOrder() {
+        //     this.$store.dispatch('addOrderToCustomer')
+        // }
     },
     computed: {
 
