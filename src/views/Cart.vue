@@ -6,6 +6,8 @@
             v-for="(product, index) in getProducts"
             :key="index"
             :product="product"
+            @removeItem="removeItem(index)"
+            
            />
         </article>
         <article class="order">
@@ -21,13 +23,12 @@
             <hr>
             <h3>Total Cost</h3>
             <h2>{{getProductSum + shippingValue}} KR</h2>
-            <router-link to="/orderconfirm"><button @click="getProductFromCart">Checkout</button> </router-link>
+            <router-link to="/orderconfirm"><button @click="sendOrder">Checkout</button> </router-link>
         </article>
     </section>
 </template>
 <script>
 import CartItem from "../components/CartItem"
-// import { mapState } from "vuex";
 export default {
     components: {
         CartItem
@@ -35,39 +36,20 @@ export default {
     data() {
         return {
             shippingValue: 49,
-            CartItem: []
+            order: {
+                items: [],
+            },
         }
     },
     
     methods: {
-        getProductFromCart() {
-        //    let cart = this.$store.getters.getCart
-           
-
-        //     let arr = this.$store.state.products.filter(
-        //         product => cart.indexOf(product._id). != -1 
-        //     );
-        //     return arr;
-        // let cart = this.$store.getters.getCart
-        // let products = this.$store.getters.getProducts
-        // let cartproducts = []
-        // for (let i = 0; i < cart.length; i++){
-        //     for (let j = 0; j <products.length; j++){
-        //         if (cart[i].id == products[j]._id) {
-        //             products[j].quantity = cart[i].quantity
-        //             cartproducts.push(products[j]) 
-
-        //         }
-                
-
-        //     }
-        // }
-        // console.log(cartproducts)
-        // return cartproducts
-
-        console.log(this.getProducts)
-      
+        removeItem(index) {
+            this.$store.state.cart.splice(index, 1);
+            if(this.$store.getters.getCartItems <= 0) {
+                this.$router.push('/shop');
+            }
         },
+
 
         onChange() {
             console.log(event.target.value)
@@ -81,31 +63,33 @@ export default {
                 this.shippingValue = 119
             }
         },
+
+        sendOrder() {
+            this.order.items = this.getOrder
+            this.$store.dispatch('addOrder', this.order)
+            console.log(this.order)
+        },
+
     },
     computed: {
-    //     ...mapState([
-    //        'products'
-    //    ]),
-        
 
         getProducts() {
             return this.$store.getters.getCartItems;
         },
+        getOrder(){
+            return this.$store.getters.getOrderItems;
+        },
 
         getProductSum() {
-            return this.$store.getters.getProductSum
-        }
-    },
-    // mounted(){
-    //   this.$store.dispatch('loadProducts')
-    // }
+            return this.getProducts.reduce((acc,product) => {
+                return acc + Number (product.item.price) * Number (product.quantity)
+            },0);
+        },
 
-    // beforeMount(){
         
-    //     this.CartItem = this.getProductFromCart
-        
-       
-    // }
+
+    },
+    
 }
 </script>
 
@@ -116,17 +100,19 @@ export default {
         min-height: 100vh;
         grid-template-columns: 75% 25%;
         grid-template-rows: 100%;
+        font-family: 'PT Sans', sans-serif;
         .cart {
             background: $shop-color;
             display: grid;
-            grid-template-columns: 9% 90% 1%;
-
+            grid-template-columns: 5% 94% 1%;
+            justify-content: space-evenly;
             h1 {
                 font-size: 2.5rem;
                 font-weight: 300;
                 color: black;
                 grid-column: 2 / span 1;
                 justify-self: left;
+                margin: 3rem 0 0rem 0;
             }
 
             .item {
@@ -137,13 +123,13 @@ export default {
 
         .order {
             background: rgb(245, 241, 241);
-            
+            text-align: center;
             .shipping {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
                 width: 70%;
-                margin: auto;
+                margin: 0 auto 6.5rem auto;
                 height: 50px;
                 padding: 2rem 1rem;
                 background:white;
@@ -154,7 +140,6 @@ export default {
                     margin-bottom: .5rem;
                 }
                 #select {
-                    
                     border: none;
                     font-size: 1.5rem;
                     -webkit-appearance: none;
@@ -163,16 +148,11 @@ export default {
                     background-image: url(../assets/arrow.png);
                     background-repeat: no-repeat;
                     background-position: 98% 95%;
-                    // option {
-                        
-                    // }
                 }
-
-                
             }
 
             hr {
-                width: 100%;
+                width: 90%;
                 border: solid rgba(134, 131, 131, 0.158) 1px;
                 margin-top: 2rem;
             }
@@ -181,13 +161,13 @@ export default {
                 font-size: 2.5rem;
                 font-weight: 300;
                 color: black;
-                margin-bottom: 6rem;
+                margin: 3rem 0 6rem 0;
             }
 
             h3 {
                 margin-top: 3rem;
-                margin-bottom: 0;
-                font-weight: 300;
+                margin-bottom: 1rem;
+                font-weight: bold;
                 font-size: 1.5rem;
             }
 

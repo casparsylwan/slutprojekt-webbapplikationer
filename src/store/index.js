@@ -35,12 +35,10 @@ export default new Vuex.Store({
 
    },   
     cart: [],
+    items: [],
+    orders: [],
   },
   mutations: {
-
-    // addToCart(state,payload){
-
-    // },
 
     setProducts(state, payload){
       state.products = []
@@ -114,9 +112,20 @@ export default new Vuex.Store({
     removeItemFromCart(state, product) {
       state.cart.splice(state.cart.indexOf(product), 1);
       state.productSum -= product.item.price * product.amount
-    }
+    },
 
   
+    setOrders(state,payload){
+      state.orders = []
+      payload.forEach(order => {
+        state.orders.push(order)
+      });
+    },
+    addOrder(state, payload){
+      state.orders.push(payload)
+      state.cart = []
+    }
+
   },
   actions: {
     async newCustomer({commit , dispatch}, customer){
@@ -191,7 +200,23 @@ export default new Vuex.Store({
         dispatch("loadProducts");
         
       }
-    }
+    },
+
+    async addOrder({commit}, items) {
+      
+      const response = await axios.post(`http://localhost:5000/api/orders/`, {...items}, { headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}})
+      console.log(response)
+      console.log("Order in Store:" & items)
+      commit('addOrder', response.data)
+    },
+
+
+     async loadOrders({commit}){
+      const response = await axios.get("http://localhost:5000/api/orders/", { headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
+      commit('setOrders', response.data)
+    },
+    
+ 
 
   },
   getters:{
@@ -221,6 +246,19 @@ export default new Vuex.Store({
         })
       )
     },
+    getOrderItems(state){
+      let orderArr = []
+      state.cart.forEach(item => {
+        for (let index = 0; index < item.quantity; index++) {
+          orderArr.push(item.id)
+        }
+      });
+      return orderArr
+    },
+
+    getOrders(state){
+      return state.orders
+    }
   }, 
 
   

@@ -16,7 +16,7 @@
             <p>{{product.item.price}} KR</p>
         </div> 
         <div class="remove">
-            <img src="../assets/remove.png" alt="">
+            <img src="../assets/remove.png" alt="" @click="removeProduct">
         </div> 
         <hr>  
     </div>
@@ -32,15 +32,24 @@ export default {
     methods: {
         
         incrementQuantity() {
+            
             this.$store.commit("incrementAmountAndSum", this.product);
         },
 
         decrementQuantity() {
-            if(this.product.quantity > 0){
+            
+            if(this.product.quantity > 1){
                 this.$store.commit("decrementAmountAndSum", this.product)
+            }else {
+                this.removeProduct();
             }
+        },
+
+        removeProduct() {
+            this.$emit('removeItem')
         }
     },
+
 
 }
 </script>
@@ -49,18 +58,23 @@ export default {
     .cartItem {
         margin-bottom: 1rem;
         display: grid;
-        grid-template-columns:  10% 20% 30% 20% 10%;
+        grid-template-columns:  20% 20% 25% 20% 10%;
         align-items: center;
+        font-weight: bold;
+        font-family: 'PT Sans', sans-serif;
         .title-desc {
            align-self: center;
            grid-column: 2 / span 1;
            color: black;
             h3{
                 margin: 0;
+                font-size: 1.5rem;
             }
 
             .desc {
                 margin: 0;
+                font-weight: 300;
+                color: grey;
             }
             
         }
@@ -100,7 +114,7 @@ export default {
         hr {
             grid-column: 1 / span 5;
             width: 100%;
-            border: solid rgba(134, 131, 131, 0.308) 1px;
+            border: solid rgba(134, 131, 131, 0.158) 1px;
         }       
     }
 </style>
