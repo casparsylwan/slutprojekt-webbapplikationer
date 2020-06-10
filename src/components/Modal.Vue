@@ -85,6 +85,7 @@ export default {
     max-width: 100px;
     padding: 5px;
     text-align: center;
+    
 }
 .btn:active {
     color:white;
@@ -107,7 +108,7 @@ export default {
   left: 0;
   top: 0;
   background-color: rgb(0, 0, 0); /* Black fallback color */
-  background-color: rgba($color: #D7E5EE, $alpha: 0.5); /* Black w/opacity */
+  background-color: rgba($color: Black, $alpha: 0.5); /* Black w/opacity */
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
 }
@@ -118,7 +119,7 @@ export default {
   width: 50%; /* 100% width */
   text-align: center; /* Centered text/links */
   margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
-  background-color: white;
+  background-color: $shop-color;
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -143,7 +144,7 @@ export default {
   .pic-container {
     width: 100%;
 
-    background-color: grey;
+    // background-color: white;
     display: flex;
     align-items: flex-end;
 
@@ -162,6 +163,13 @@ export default {
 .right{
    grid-column: 2;
    padding: 1rem;
+}
+
+label{
+font-variant: small-caps;
+}
+#quantity{
+  font-size: 1rem;
 }
 
 
