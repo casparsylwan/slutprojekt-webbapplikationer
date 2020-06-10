@@ -37,6 +37,7 @@ export default new Vuex.Store({
     cart: [],
     items: [],
     orders: [],
+    lastOrder: ""
   },
   mutations: {
 
@@ -120,6 +121,7 @@ export default new Vuex.Store({
       payload.forEach(order => {
         state.orders.push(order)
       });
+      state.lastOrder = payload[payload.length-1]._id
     },
     addOrder(state, payload){
       state.orders.push(payload)
@@ -258,6 +260,10 @@ export default new Vuex.Store({
 
     getOrders(state){
       return state.orders
+    },
+
+    getLastOrder(state) {
+      return state.lastOrder
     }
   }, 
 
