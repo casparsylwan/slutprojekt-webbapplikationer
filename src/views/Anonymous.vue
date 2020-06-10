@@ -1,33 +1,27 @@
 <template>
-  <div class="anonymous">
-    <section>
-      <article class="background">
+        <section class="anonymous">
         <div class="register">
           <h2>Join Our Family</h2>
           <button>Register Here</button>
         </div>
-      </article>
-      <Footer />
-    </section>
-  </div>
+      </section>
+  
 </template>
 
 <script>
-import Footer from "../components/Footer"
 
 export default {
   name: 'Home',
-  components: {
-    Footer
-  },
+ 
 
 }
 </script>
 
 <style lang="scss" scoped>
-  .background {
+  .anonymous {
     background-image: url("../assets/background.jpg");
-    height: 900px;
+    flex-grow: 1;
+    // height: 900px;
     background-size: cover;
     background-repeat: no-repeat;
     display: grid;

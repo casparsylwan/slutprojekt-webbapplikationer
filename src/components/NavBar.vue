@@ -27,7 +27,7 @@
                 <router-link to="/cart">Cart</router-link>
             </div>
         </nav>
-         {{ getClient.role }}
+         <!-- {{ getClient.role }} -->
     </header>
    
 </template>

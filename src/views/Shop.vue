@@ -11,6 +11,7 @@
 <script>
 import product from '@/components/Product'
 import modal from '../components/Modal'
+
 import { mapState } from "vuex"
 
 
