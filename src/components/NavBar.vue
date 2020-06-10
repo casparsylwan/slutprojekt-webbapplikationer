@@ -1,6 +1,6 @@
 <template>
 
-    <header class="navBar">
+    <header class="navBar" v-if="(this.$route.path !== '/orderconfirm')">
         <nav class="top-nav" v-if="getClient.name.length<1">
             <router-link to="/login">Log In</router-link>
             <router-link to="/login">Create Account</router-link>
