@@ -35,6 +35,7 @@ export default new Vuex.Store({
 
    },   
     cart: [],
+    items: [],
   },
   mutations: {
 
@@ -221,6 +222,15 @@ export default new Vuex.Store({
         })
       )
     },
+    getOrderItems(state){
+      let orderArr = []
+      state.cart.forEach(item => {
+        for (let index = 0; index < item.quantity; index++) {
+          orderArr.push(item.id)
+        }
+      });
+      return orderArr
+    }
   }, 
 
   

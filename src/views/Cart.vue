@@ -65,7 +65,7 @@ export default {
         // console.log(cartproducts)
         // return cartproducts
 
-        console.log(this.getProducts)
+        console.log(this.$store.getters.getOrderItems)
       
         },
 
