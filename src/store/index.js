@@ -195,6 +195,11 @@ export default new Vuex.Store({
     async addOrderToCustomer() {
     const response = await axios.get(`http://localhost:5000/api/orders/`, { headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}})
     console.log(response)
+    },
+
+    prepareOrder() {
+      let preparedOrder = []
+      
     }
 
   },
