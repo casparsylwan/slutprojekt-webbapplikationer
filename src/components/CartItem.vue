@@ -32,11 +32,13 @@ export default {
     methods: {
         
         incrementQuantity() {
+            
             this.$store.commit("incrementAmountAndSum", this.product);
         },
 
         decrementQuantity() {
-            if(this.product.quantity > 0){
+            
+            if(this.product.quantity > 1){
                 this.$store.commit("decrementAmountAndSum", this.product)
             }else {
                 this.removeProduct();
