@@ -67,7 +67,6 @@ export default {
         sendOrder() {
             this.order.items = this.getOrder
             this.$store.dispatch('addOrder', this.order)
-            console.log(this.order)
         },
 
     },
@@ -99,8 +98,6 @@ export default {
         display: grid;
         min-height: 100vh;
         grid-template-columns: 75% 25%;
-        grid-template-rows: 100%;
-        font-family: 'PT Sans', sans-serif;
         .cart {
             background: $shop-color;
             display: grid;

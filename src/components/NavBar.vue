@@ -24,7 +24,7 @@
                 <router-link to="/shop">Shop</router-link>
                 <router-link to="/about">Our Values</router-link>
                 <router-link to="">Contact</router-link>
-                <router-link to="/cart">Cart</router-link>
+                <router-link to="/cart" v-if="this.$store.state.cart.length > 0">Cart</router-link>
             </div>
         </nav>
          {{ getClient.role }}
@@ -34,7 +34,6 @@
 <script>
 export default {
     props: {
-        anonymous: Boolean
     },
     data: () => ({
 
@@ -71,6 +70,7 @@ export default {
 
 <style lang="scss" scoped>
     .navBar {
+        font-family: 'PT Sans', sans-serif;
         .top-nav {
             background: black;
             display: flex;
