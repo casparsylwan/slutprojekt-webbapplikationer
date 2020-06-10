@@ -6,9 +6,8 @@
         </div>
         <div class="right column">
             <img src="@/assets/close.svg" alt="Close button" @click="$emit('close')" class="close-btn">
-              <h2 class="price">{{data.price}} kr</h2>
-              <h2 class="short-desc"> {{data.shortDesc}}</h2>
               <h1 class="title">{{data.title}}</h1>
+              <h2 class="subheading">{{data.price}} Kr | {{data.shortDesc}} </h2> 
               <span>___________________________________</span>
               <p class="long-desc">{{data.longDesc}}</p>
               <input id="quantity" class="quantity" type="number" min="1" v-model="tempQuantity">
@@ -108,7 +107,7 @@ export default {
   left: 0;
   top: 0;
   background-color: rgb(0, 0, 0); /* Black fallback color */
-  background-color: rgba(0, 0, 0, 0.5); /* Black w/opacity */
+  background-color: rgba($color: #D7E5EE, $alpha: 0.5); /* Black w/opacity */
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
 }
@@ -123,14 +122,24 @@ export default {
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+
+  h1{
+    font-size: 2.5rem;
+    font-variant: small-caps;
+  }
   
+  h2{
+    font-size: 1.5rem;
+  }
+  
+  .long-desc{
+    margin: 1.5rem;
+    line-height: 1.1rem;
+    font-variant: small-caps;
+  }
 }
 
-.shadow {
-  -webkit-box-shadow: 0px 0px 0px 9999px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 0px 0px 0px 9999px rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 0px 0px 9999px rgba(0, 0, 0, 0.5);
-}
+
   .pic-container {
     width: 100%;
 
