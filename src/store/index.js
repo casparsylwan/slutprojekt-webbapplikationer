@@ -40,10 +40,6 @@ export default new Vuex.Store({
   },
   mutations: {
 
-    // addToCart(state,payload){
-
-    // },
-
     setProducts(state, payload){
       state.products = []
       for(let i=0; i<payload.length; i++)
@@ -121,6 +117,7 @@ export default new Vuex.Store({
     },
     addOrder(state, payload){
       state.orders.push(payload)
+      state.cart = []
     }
 
   },
@@ -207,10 +204,6 @@ export default new Vuex.Store({
       commit('addOrder', response.data)
     },
 
-    async addOrderToCustomer() {
-    const response = await axios.get(`http://localhost:5000/api/orders/`, { headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}})
-    console.log(response)
-    },
 
      async loadOrders({commit}){
       const response = await axios.get("http://localhost:5000/api/orders/", { headers: {"Authorization" : `Bearer ${this.state.localCustomer.token}`}});
