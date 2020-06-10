@@ -14,9 +14,10 @@
               <label for="quantity"> Quantity</label>
               <br>
             <div class="btn" @click=addToCart>Add to Cart</div >
-
-            
-            
+            <div class="shipping-info">
+              <p>Ships to <em>Stockholm, Sweden </em></p>
+              <p>Available to ship in  <em>1-2 days.</em> </p>
+            </div>
           </div>
       </div>
     </article>
@@ -138,6 +139,14 @@ export default {
     line-height: 1.1rem;
     font-variant: small-caps;
   }
+
+  
+
+ em{
+   font-size: 1.1rem;
+   font-variant: small-caps;
+   color: yellowgreen;
+ }
 }
 
 
@@ -147,6 +156,8 @@ export default {
     // background-color: white;
     display: flex;
     align-items: flex-end;
+    padding-top: 3rem;
+    // padding-bottom: 3rem;
 
     img {
       width: inherit;
