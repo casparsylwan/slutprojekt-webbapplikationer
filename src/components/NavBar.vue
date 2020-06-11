@@ -27,7 +27,6 @@
                 <router-link to="/cart" v-if="this.$store.state.cart.length > 0">Cart</router-link>
             </div>
         </nav>
-         {{ getClient.role }}
     </header>
    
 </template>
