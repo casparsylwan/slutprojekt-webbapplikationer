@@ -23,7 +23,7 @@
 
             </article>
             <article class="orders">
-                <div class="order" v-for="(order, index) in orders" :key="index">
+                <div class="order">
                     <div class="orderTime">
                        <p>Beställningstid:</p> 
                        
