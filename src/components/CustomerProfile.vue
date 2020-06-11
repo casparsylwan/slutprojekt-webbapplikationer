@@ -23,20 +23,29 @@
 
             </article>
             <article class="orders">
-                <div class="order-box">
-                     {{ orders }}
-                </div>
                 <div class="order" v-for="(order, index) in orders" :key="index">
                     <div class="orderTime">
                        <p>Beställningstid:</p> 
-                       <p>{{new Date(order.timeStamp).toLocaleString() }}</p>
+                       
                     </div>
                     <div class="orderId">
                        <p>Order id:</p> 
+                       
+                    </div>
+                    <div class="orderId">
+                       <p>Order id:</p> 
+                       
+                    </div>
+                </div>
+                
+                <div class="order" v-for="(order, index) in orders" :key="index">
+                    <div class="orderTime">                       
+                       <p>{{new Date(order.timeStamp).toLocaleString() }}</p>
+                    </div>
+                    <div class="orderId">                       
                        <p>{{ order._id }}</p>
                     </div>
                     <div class="orderId">
-                       <p>Order id:</p> 
                        <p>{{ order.orderValue }} kr</p>
                     </div>
                 </div>
@@ -203,12 +212,17 @@ export default {
         display: flex;
         justify-content: space-evenly;
         color:#971;
+        border-bottom: solid #fff 2px;
+        
 
         .orderTime, .orderId{
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: center;
             font-weight: bold;
             font-size:1.5rem;
+            width:15rem;
+            padding-left: 1.5rem;
 
         }
     }
