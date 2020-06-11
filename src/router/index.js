@@ -10,8 +10,22 @@ import Admin from "../views/Admin.vue";
 import Anonymous from "../views/Anonymous.vue";
 import Account from "../views/Account.vue";
 import OrderConfirm from '../views/OrderConfirm.vue';
+import Contact from '../views/Contact.vue';
 
 Vue.use(VueRouter)
+
+function guardLoginRoute(to, from, next){
+
+  // let isAuthenticated= false;
+ 
+   if(!localStorage.getItem('theCustomer')){
+     
+    next();
+     
+   }else{
+     next('/account')
+   }
+ }
 
 function guardAdminRoute(to, from, next){
 
@@ -93,6 +107,7 @@ function guardHomePage(to, from, next){
   {
     path: '/login',
     name: 'Login',
+    beforeEnter : guardLoginRoute,
     component: Login
   },
   {
@@ -128,6 +143,11 @@ function guardHomePage(to, from, next){
     path: '/orderconfirm',
     name: 'OrderConfirm',
     component: OrderConfirm
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: Contact
   }
 ]
 

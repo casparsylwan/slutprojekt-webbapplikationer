@@ -6,6 +6,7 @@
         <div class="input-box">
 
             <h2>Kontaktuppgifter</h2>
+            <h2>{{ somethingWentWrong }}</h2>
 
             <div class="input name">
                 <label>Name</label>
@@ -42,7 +43,7 @@
             </div>
             <div class="input password">
                 <label>Postnummer</label>
-                <input type="text" placeholder="Ditt supr hemliga lösenord" v-model="adress.zip">
+                <input type="text" placeholder="Din post adress" v-model="adress.zip">
                 
             </div>
                 <div class="input password">
@@ -72,8 +73,17 @@ export default {
               street:'',
               city:'',
               zip:''
-          }
+          },
+          somethingWentWrong:''
       }
+  },
+  computed:{
+
+    getClient(){
+      return this.$store.getters.getClient
+    }
+    
+    
   },
   methods:{
       open(){
@@ -82,7 +92,19 @@ export default {
     },
     register(){
         this.customer.adress = this.adress;
-        this.$store.dispatch("newCustomer", this.customer);
+        let self = this;
+        let prom = this.$store.dispatch("newCustomer", this.customer);
+        prom.then(() =>{
+            
+                self.$router.replace("/shop")
+           
+        })
+                
+             
+               
+        
+        
+     
        
     },
     password(){

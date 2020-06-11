@@ -22,19 +22,41 @@
             <article class="adress">
 
             </article>
-            <article class="orders">
-                <div v-for="(order, index) in orders" :key="index">
-                  <h1>Order Id</h1>
-                  <p>{{order._id}}</p> 
-                  <h1>Order Date</h1>
-                  <p>{{order.timeStamp}}</p>
-                  <br> 
-                </div>
-            </article>
+            
 
         </section>
+        
 
         </div>
+        <article class="orders">
+
+                <div class="order">
+
+                    <div class="orderTime">
+                       <p>Beställningstid:</p> 
+                       
+                    </div>
+                    
+                    <div class="orderId">
+                       <p>Order summa:</p> 
+                      
+                    </div>
+
+                </div>
+
+
+                <div class="order" v-for="(order, index) in orders" :key="index">
+
+                    <div class="orderTime">                       
+                       <p>{{new Date(order.timeStamp).toLocaleString() }}</p>
+                    </div>
+                    
+                    <div class="orderId">                       
+                       <p>{{ order.orderValue }} kr</p>
+                    </div>
+
+                </div>
+            </article>
     </div> 
 </template>
 <script>
@@ -65,7 +87,8 @@ export default {
         
 
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: flex-start;
 
 
     //    background-color: #999;
@@ -188,9 +211,31 @@ export default {
         }
     }
 
-    // .table{
+     .order{
+        height: 4rem;
+        background: #D7E5EE;
+        display: flex;
+        border-bottom: 1px solid #fff;
+        
+        color:#971;
 
-    // }
+        .orderTime, .orderId{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size:1.5rem;
+            padding-left: 0.5rem;
+            
+            width: 50%;
+        }
+
+        &:hover{
+            background: #777;
+            color:#000;
+        }
+    }
 
     @keyframes frame {
         0%{

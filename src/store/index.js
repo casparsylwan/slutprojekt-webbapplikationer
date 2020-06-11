@@ -37,6 +37,7 @@ export default new Vuex.Store({
     cart: [],
     items: [],
     orders: [],
+    lastOrder: ""
   },
   mutations: {
 
@@ -109,11 +110,18 @@ export default new Vuex.Store({
       
     },
 
+    removeItemFromCart(state, product) {
+      state.cart.splice(state.cart.indexOf(product), 1);
+      state.productSum -= product.item.price * product.amount
+    },
+
+  
     setOrders(state,payload){
       state.orders = []
       payload.forEach(order => {
         state.orders.push(order)
       });
+      state.lastOrder = payload[payload.length-1]._id
     },
     addOrder(state, payload){
       state.orders.push(payload)
@@ -128,7 +136,7 @@ export default new Vuex.Store({
       commit('registerNewCustomer', response.data)
       if(response.status == 200){
         dispatch("loginCall", customer);
-        
+        return 200
       }
     
       
@@ -252,6 +260,10 @@ export default new Vuex.Store({
 
     getOrders(state){
       return state.orders
+    },
+
+    getLastOrder(state) {
+      return state.lastOrder
     }
   }, 
 

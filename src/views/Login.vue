@@ -8,11 +8,11 @@
                <p v-if="rOut ==''">{{ btnGoToLogginText }}</p>              
             </div>
 
-            <div @click="test()" class="btn1">                
+            <!-- <div @click="test()" class="btn1">                
                 test
                 {{ redirectToMyPage(getClient) }}             
             </div>
-        
+         -->
     
   </div>
 </template>
@@ -64,7 +64,13 @@ export default {
     getClient(){
       return this.$store.getters.getClient
     }
-  }
+  },
+//   beforeMount(){
+
+//       navToRegiter(){
+//           x.id == this.$route.params.id
+//       }
+//     }
   }
 
 </script>
